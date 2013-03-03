@@ -10,9 +10,9 @@
 	    <TextView
 	        android:layout_width="wrap_content"
 	        android:layout_height="fill_parent"
-	        android:text="OpenAquaponics"
-	        android:background="#ffffff"
-	        android:textColor="#000000"
+	        android:text=" OpenAquaponics"
+	        android:background="@color/White"
+	        android:textColor="@color/Black"
 	        android:textSize="20dp"
 	        android:gravity="center_vertical|left"
 	        android:paddingTop="5dp"
@@ -22,16 +22,53 @@
 	        android:layout_width="0dp"
 	        android:layout_height="fill_parent"
 	        android:layout_weight="60"
-	        android:text="nestinator"
-	        android:background="#ffffff"
-	        android:textColor="#3BB1FF"
+	        android:text="nestinator  "
+	        android:background="@color/White"
+	        android:textColor="@color/Black"
 	        android:textSize="20dp"
 	        android:gravity="center_vertical|right"
 	        android:paddingTop="5dp"
 	        android:paddingBottom="5dp">
 	    </TextView>
-
   	</LinearLayout>
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="horizontal">
+	    <TextView
+  	        android:layout_weight="33"
+  	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:id="@+id/but_oanode"
+	        android:text="OANode"
+	        android:background="@color/LightGrey"
+	        android:textColor="@color/Grey"
+	        android:textSize="14dp"
+	        android:gravity="center">
+	    </TextView>
+	    <TextView
+  	        android:layout_weight="33"
+  	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:id="@+id/but_oaaccounting"
+	        android:text="OAAccounting"
+	        android:background="@color/LightGrey"
+	        android:textColor="@color/Grey"
+	        android:textSize="14dp"
+	        android:gravity="center">
+	    </TextView>
+	    <TextView
+  	        android:layout_weight="33"
+  	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:id="@+id/but_oatask"
+	        android:text="OATask"
+	        android:background="@color/LightGrey"
+	        android:textColor="@color/Grey"
+	        android:textSize="14dp"
+	        android:gravity="center">
+	    </TextView>
+    </LinearLayout>
   	<!-- Main ListView 
 		 Always give id value as list(@android:id/list)
 	-->

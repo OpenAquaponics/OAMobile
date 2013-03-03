@@ -12,9 +12,19 @@ import org.json.JSONObject;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.gesture.GestureOverlayView.OnGestureListener;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.view.GestureDetectorCompat;
+import android.support.v4.view.MotionEventCompat;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,9 +33,16 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.TextView.BufferType;
 
 
-public class OANodeActivity extends ListActivity {
+public class OANodeActivity extends ListActivity implements 
+        GestureDetector.OnGestureListener,
+        GestureDetector.OnDoubleTapListener {
+    
+    private static final String DEBUG_TAG = "Gestures";
+    private GestureDetectorCompat mDetector;
+    private int mCurrIdx = 0;
 
 	// url to make request
 	//private static String url = "http://api.androidhive.info/contacts/";
@@ -48,7 +65,10 @@ public class OANodeActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		//setContentView(R.layout.main);
 		setContentView(R.layout.oanode_main);
-		
+		mDetector = new GestureDetectorCompat(this,this);
+        mDetector.setOnDoubleTapListener(this);
+
+        
 		// Hashmap for ListView
 		ArrayList<HashMap<String, String>> contactList = new ArrayList<HashMap<String, String>>();
 
@@ -93,12 +113,18 @@ public class OANodeActivity extends ListActivity {
 			e.printStackTrace();
 		}
 		
+		TextView tv = (TextView)findViewById(R.id.but_oanode);
+        tv.setTextColor(getResources().getColor(R.color.Green));
+        tv.setBackgroundColor(getResources().getColor(R.color.DarkGrey));
+		
+		
+		
 		// selecting single ListView item
 		ListView lv = getListView();
 
-        LayoutInflater inflater = getLayoutInflater();
-        View header = inflater.inflate(R.layout.oanode_header, (ViewGroup) findViewById(R.id.oanode_header_layout));
-        lv.addHeaderView(header, null, false);
+//        LayoutInflater inflater = getLayoutInflater();
+//        View header = inflater.inflate(R.layout.oanode_header, (ViewGroup) findViewById(R.id.oanode_header_layout));
+//        lv.addHeaderView(header, null, false);
         
 		/**
 		 * Updating parsed JSON data into ListView
@@ -131,9 +157,88 @@ public class OANodeActivity extends ListActivity {
 
 			}
 		});
-		
-		
-
 	}
+
+	
+	
+    @Override 
+    public boolean onTouchEvent(MotionEvent event){ 
+        this.mDetector.onTouchEvent(event);
+        // Be sure to call the superclass implementation
+        return super.onTouchEvent(event);
+    }
+
+    public boolean onDown(MotionEvent event) { 
+        //Log.d(DEBUG_TAG,"onDown: " + event.toString()); 
+        return true;
+    }
+
+    public boolean onFling(MotionEvent event1, MotionEvent event2, 
+            float velocityX, float velocityY) {
+        int resource[] = { R.id.but_oanode, R.id.but_oaaccounting, R.id.but_oatask };
+        
+        Log.d(DEBUG_TAG, "onFling: " + velocityX + "   " + velocityY);
+        if(velocityX > 1000.0) { /* Flick Right */
+            mCurrIdx++;
+        }
+        else if(velocityX < -1000.0) { /* Flick Right */
+            mCurrIdx--;
+        }
+        
+        if(mCurrIdx < 0)
+            mCurrIdx = resource.length-1;
+        else if(mCurrIdx >= resource.length)
+            mCurrIdx = 0;
+        
+        for(int i = 0; i < resource.length; i++) {
+            if(i == mCurrIdx) {
+                TextView tv = (TextView)findViewById(resource[i]);
+                tv.setTextColor(getResources().getColor(R.color.Green));
+                tv.setBackgroundColor(getResources().getColor(R.color.DarkGrey));
+            }
+            else {
+                TextView tv = (TextView)findViewById(resource[i]);
+                tv.setTextColor(getResources().getColor(R.color.DarkGrey));
+                tv.setBackgroundColor(getResources().getColor(R.color.LightGrey));
+            }
+        }
+        
+        return true;
+    }
+
+    public void onLongPress(MotionEvent event) {
+        //Log.d(DEBUG_TAG, "onLongPress: " + event.toString()); 
+    }
+
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
+            float distanceY) {
+        //Log.d(DEBUG_TAG, "onScroll: " + e1.toString()+e2.toString());
+        return true;
+    }
+
+    public void onShowPress(MotionEvent event) {
+        //Log.d(DEBUG_TAG, "onShowPress: " + event.toString());
+    }
+
+    public boolean onSingleTapUp(MotionEvent event) {
+        //Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
+        return true;
+    }
+
+    public boolean onDoubleTap(MotionEvent event) {
+        //Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
+        return true;
+    }
+
+    public boolean onDoubleTapEvent(MotionEvent event) {
+        //Log.d(DEBUG_TAG, "onDoubleTapEvent: " + event.toString());
+        return true;
+    }
+
+    public boolean onSingleTapConfirmed(MotionEvent event) {
+        //Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
+        return true;
+    }
+
 
 }
