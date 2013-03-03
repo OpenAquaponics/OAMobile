@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="horizontal">
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:text="OpenAquaponics"
+	        android:background="#ffffff"
+	        android:textColor="#000000"
+	        android:textSize="20dp"
+	        android:gravity="center_vertical|left"
+	        android:paddingTop="5dp"
+	        android:paddingBottom="5dp">
+	    </TextView>
+	    <TextView
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="60"
+	        android:text="nestinator"
+	        android:background="#ffffff"
+	        android:textColor="#3BB1FF"
+	        android:textSize="20dp"
+	        android:gravity="center_vertical|right"
+	        android:paddingTop="5dp"
+	        android:paddingBottom="5dp">
+	    </TextView>
+
+  	</LinearLayout>
+  	<!-- Main ListView 
+		 Always give id value as list(@android:id/list)
+	-->
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+	<TextView
+		android:id="@+id/android:empty"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@+string/empty_list" />
+</LinearLayout>

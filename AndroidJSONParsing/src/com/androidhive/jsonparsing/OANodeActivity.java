@@ -46,7 +46,8 @@ public class OANodeActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		//setContentView(R.layout.main);
+		setContentView(R.layout.oanode_main);
 		
 		// Hashmap for ListView
 		ArrayList<HashMap<String, String>> contactList = new ArrayList<HashMap<String, String>>();
