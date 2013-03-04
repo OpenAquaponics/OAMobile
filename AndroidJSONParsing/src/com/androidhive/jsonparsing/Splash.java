@@ -22,7 +22,7 @@ public class Splash extends Activity {
                     ProgressBar pbLoading = (ProgressBar)findViewById(R.id.pb_loading_app);
                     pbLoading.setProgress(0);
                     for(int i = 0; i < 5; i++) {
-                        sleep(1000);
+                        sleep(330);
                         pbLoading.setProgress((i+1)*20);
                     }
                 }

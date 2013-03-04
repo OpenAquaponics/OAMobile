@@ -11,10 +11,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ListActivity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.gesture.GestureOverlayView.OnGestureListener;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.text.SpannableString;
@@ -37,6 +41,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
+import android.widget.Toast;
 
 
 public class OANodeActivity extends ListActivity implements 
@@ -215,7 +220,8 @@ public class OANodeActivity extends ListActivity implements
     }
 
     public void onLongPress(MotionEvent event) {
-        //Log.d(DEBUG_TAG, "onLongPress: " + event.toString()); 
+        //Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
+        Toast.makeText(getApplicationContext(), "Create a new OANode", Toast.LENGTH_SHORT).show();
     }
 
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
@@ -235,6 +241,29 @@ public class OANodeActivity extends ListActivity implements
 
     public boolean onDoubleTap(MotionEvent event) {
         //Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
+        
+        String longText = "There has been a new OASystem created for nestinator.  The system has 2 OANodes.";
+        //Intent intent = new Intent(this, NotificationReceiver.class);
+        //PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        
+        // Build notification
+        // Actions are just fake
+        NotificationCompat.Builder noti = new NotificationCompat.Builder(this)
+                .setContentTitle("OAMobile")
+                .setContentText("OASystem change")
+                .setSmallIcon(R.drawable.accessories_calculator)
+                //.setContentIntent(pIntent)
+                //.addAction(R.drawable.icon, "Call", pIntent)
+                //.addAction(R.drawable.icon, "More", pIntent)
+                //.addAction(R.drawable.icon, "And more", pIntent).build()
+                .setStyle(new NotificationCompat.InboxStyle().setBigContentTitle("OASystem change details").addLine(longText));
+            
+          
+        NotificationManager notificationManager = 
+          (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        
+        notificationManager.notify(0, noti.build());
+        
         return true;
     }
 
