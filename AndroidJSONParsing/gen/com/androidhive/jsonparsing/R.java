@@ -176,16 +176,18 @@ public final class R {
         public static final int ic_launcher=0x7f020004;
     }
     public static final class id {
-        public static final int but_oaaccounting=0x7f060008;
-        public static final int but_oanode=0x7f060007;
-        public static final int but_oatask=0x7f060009;
+        public static final int but_oaaccounting=0x7f060009;
+        public static final int but_oanode=0x7f060008;
+        public static final int but_oasystem=0x7f060007;
+        public static final int but_oatask=0x7f06000a;
         public static final int email=0x7f060001;
-        public static final int email_label=0x7f06000b;
+        public static final int email_label=0x7f06000c;
         public static final int mobile=0x7f060002;
-        public static final int mobile_label=0x7f06000c;
+        public static final int mobile_label=0x7f06000d;
         public static final int name=0x7f060000;
-        public static final int name_label=0x7f06000a;
+        public static final int name_label=0x7f06000b;
         public static final int oanode_header_layout=0x7f060003;
+        public static final int pb_loading_app=0x7f06000e;
         public static final int sChannelNames=0x7f060005;
         public static final int sDescription=0x7f060006;
         public static final int sNodeId=0x7f060004;
@@ -198,10 +200,12 @@ public final class R {
         public static final int oanode_list=0x7f030004;
         public static final int oanode_main=0x7f030005;
         public static final int single_list_item=0x7f030006;
+        public static final int splash=0x7f030007;
     }
     public static final class string {
         public static final int app_name=0x7f050001;
-        public static final int empty_list=0x7f050002;
+        public static final int empty_list=0x7f050003;
         public static final int hello=0x7f050000;
+        public static final int loading_screen=0x7f050002;
     }
 }

@@ -21,12 +21,15 @@ import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.Display;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
@@ -175,7 +178,12 @@ public class OANodeActivity extends ListActivity implements
 
     public boolean onFling(MotionEvent event1, MotionEvent event2, 
             float velocityX, float velocityY) {
-        int resource[] = { R.id.but_oanode, R.id.but_oaaccounting, R.id.but_oatask };
+        int resource[] = { R.id.but_oasystem, R.id.but_oanode, R.id.but_oaaccounting, R.id.but_oatask };
+        
+//        WindowManager mWindowManager =  (WindowManager) getSystemService(WINDOW_SERVICE);
+//        Display mDisplay = mWindowManager.getDefaultDisplay();
+//        mDisplay.getRotation()
+//        Surface.ROTATION_0;
         
         Log.d(DEBUG_TAG, "onFling: " + velocityX + "   " + velocityY);
         if(velocityX > 1000.0) { /* Flick Right */

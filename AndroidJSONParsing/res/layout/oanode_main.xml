@@ -36,36 +36,47 @@
 	    android:layout_height="fill_parent"
 	    android:orientation="horizontal">
 	    <TextView
-  	        android:layout_weight="33"
+  	        android:layout_weight="25"
+  	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:id="@+id/but_oasystem"
+	        android:text="OASystem"
+	        android:background="@color/LightGrey"
+	        android:textColor="@color/Grey"
+	        android:textSize="13dp"
+	        android:gravity="center">
+	    </TextView>
+	    <TextView
+  	        android:layout_weight="25"
   	        android:layout_width="0dp"
 	        android:layout_height="fill_parent"
 	        android:id="@+id/but_oanode"
 	        android:text="OANode"
 	        android:background="@color/LightGrey"
 	        android:textColor="@color/Grey"
-	        android:textSize="14dp"
+	        android:textSize="13dp"
 	        android:gravity="center">
 	    </TextView>
 	    <TextView
-  	        android:layout_weight="33"
+  	        android:layout_weight="25"
   	        android:layout_width="0dp"
 	        android:layout_height="fill_parent"
 	        android:id="@+id/but_oaaccounting"
 	        android:text="OAAccounting"
 	        android:background="@color/LightGrey"
 	        android:textColor="@color/Grey"
-	        android:textSize="14dp"
+	        android:textSize="13dp"
 	        android:gravity="center">
 	    </TextView>
 	    <TextView
-  	        android:layout_weight="33"
+  	        android:layout_weight="25"
   	        android:layout_width="0dp"
 	        android:layout_height="fill_parent"
 	        android:id="@+id/but_oatask"
 	        android:text="OATask"
 	        android:background="@color/LightGrey"
 	        android:textColor="@color/Grey"
-	        android:textSize="14dp"
+	        android:textSize="13dp"
 	        android:gravity="center">
 	    </TextView>
     </LinearLayout>
