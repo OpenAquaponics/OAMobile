@@ -10,10 +10,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.gesture.GestureOverlayView.OnGestureListener;
 import android.graphics.Color;
@@ -221,7 +223,7 @@ public class OANodeActivity extends ListActivity implements
 
     public void onLongPress(MotionEvent event) {
         //Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
-        Toast.makeText(getApplicationContext(), "Create a new OANode", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Create a new OANode", Toast.LENGTH_SHORT).show();
     }
 
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
@@ -274,6 +276,30 @@ public class OANodeActivity extends ListActivity implements
 
     public boolean onSingleTapConfirmed(MotionEvent event) {
         //Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
+
+
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setTitle("OAAccounting");
+        adb.setMessage("Would you like to create a transaction?");
+        adb.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int id)
+            {
+                Toast.makeText(getApplicationContext(), "Transaction created", Toast.LENGTH_SHORT).show();
+            }
+        });
+        adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int id)
+            {
+                // Action for 'Cancel' Button
+                dialog.cancel();
+            }
+        });
+        adb.setIcon(R.drawable.computer_laptop);
+        adb.show();
+
+
         return true;
     }
 
