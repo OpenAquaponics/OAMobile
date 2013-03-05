@@ -4,5 +4,6 @@
     <string name="hello">Hello World, AndroidJSONParsingActivity!</string>
     <string name="app_name">OAMobile</string>
     <string name="loading_screen">OAMobile Loading Screen</string>
-
+	<string name="menu_save">Save Action Bar</string>
+	
 </resources>

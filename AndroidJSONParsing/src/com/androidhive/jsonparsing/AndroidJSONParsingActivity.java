@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -90,6 +91,9 @@ public class AndroidJSONParsingActivity extends ListActivity {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+
+		ActionBar actionBar = getActionBar();
+		actionBar.show();
 		
 		// selecting single ListView item
 		ListView lv = getListView();

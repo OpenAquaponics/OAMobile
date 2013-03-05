@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.Notification;
@@ -31,6 +32,9 @@ import android.view.Display;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
@@ -127,7 +131,9 @@ public class OANodeActivity extends ListActivity implements
         tv.setTextColor(getResources().getColor(R.color.Green));
         tv.setBackgroundColor(getResources().getColor(R.color.DarkGrey));
 		
-		
+
+		ActionBar actionBar = getActionBar();
+		actionBar.show();
 		
 		// selecting single ListView item
 		ListView lv = getListView();
@@ -220,7 +226,29 @@ public class OANodeActivity extends ListActivity implements
         
         return true;
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // use an inflater to populate the ActionBar with items
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_activity, menu);
+        return true;
+    }
+    
+    @Override
+  	public boolean onOptionsItemSelected(MenuItem item){
+    	// same as using a normal menu
+    	switch(item.getItemId()) {
+    	case R.id.item_refresh:
+    		Toast.makeText(this, "Refreshing...", Toast.LENGTH_SHORT).show();
+    		break;
+    	case R.id.item_save:
+    		Toast.makeText(this, "Saving...", Toast.LENGTH_SHORT).show();
+    		break;
+    	}
+    	
+  		return true;
+  	}
+    
     public void onLongPress(MotionEvent event) {
         //Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
         //Toast.makeText(getApplicationContext(), "Create a new OANode", Toast.LENGTH_SHORT).show();
