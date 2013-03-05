@@ -11,7 +11,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.ListActivity;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -131,10 +135,10 @@ public class OANodeActivity extends ListActivity implements
         tv.setTextColor(getResources().getColor(R.color.Green));
         tv.setBackgroundColor(getResources().getColor(R.color.DarkGrey));
 		
-
-		ActionBar actionBar = getActionBar();
-		actionBar.show();
-		
+       
+        final ActionBar actionBar = getActionBar();
+		actionBar.show(); // ??
+        
 		// selecting single ListView item
 		ListView lv = getListView();
 
@@ -219,7 +223,7 @@ public class OANodeActivity extends ListActivity implements
             }
             else {
                 TextView tv = (TextView)findViewById(resource[i]);
-                tv.setTextColor(getResources().getColor(R.color.DarkGrey));
+                tv.setTextColor(getResources().getColor(R.color.Grey));
                 tv.setBackgroundColor(getResources().getColor(R.color.LightGrey));
             }
         }
@@ -332,4 +336,62 @@ public class OANodeActivity extends ListActivity implements
     }
 
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+     // TODO Auto-generated method stub
+     super.onSaveInstanceState(outState);
+     outState.putInt("SAVED_INDEX", getActionBar().getSelectedNavigationIndex());
+    }
+
+    
+    
+    
+    public static class TabListener<T extends Fragment> 
+        implements ActionBar.TabListener{
+        
+           private final Activity myActivity;
+           private final String myTag;
+           private final Class<T> myClass;
+
+           public TabListener(Activity activity, String tag, Class<T> cls) {
+               myActivity = activity;
+               myTag = tag;
+               myClass = cls;
+           }
+
+     public void onTabSelected(Tab tab, FragmentTransaction ft) {
+
+      Fragment myFragment = myActivity.getFragmentManager().findFragmentByTag(myTag);
+      
+      // Check if the fragment is already initialized
+            if (myFragment == null) {
+                // If not, instantiate and add it to the activity
+                myFragment = Fragment.instantiate(myActivity, myClass.getName());
+                ft.add(android.R.id.content, myFragment, myTag);
+            } else {
+                // If it exists, simply attach it in order to show it
+                ft.attach(myFragment);
+            }
+      
+     }
+
+     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+      
+    	Fragment myFragment = myActivity.getFragmentManager().findFragmentByTag(myTag);
+      
+      	if (myFragment != null) {
+                // Detach the fragment, because another one is being attached
+                ft.detach(myFragment);
+        }
+      
+     }
+
+     public void onTabReselected(Tab tab, FragmentTransaction ft) {
+      // TODO Auto-generated method stub
+      
+     }
+        
+   }
+    
+    
 }
