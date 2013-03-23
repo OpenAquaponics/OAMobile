@@ -23,15 +23,14 @@
 	        </TextView>
 	        <!-- Price Label -->
 	        <TextView
-	            android:id="@+string/sNodeId"
+	            android:id="@+id/sNodeId"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:textColor="#5d5d5d" 
+	            android:textColor="#acacac" 
 	            android:textStyle="bold"
 	            android:gravity="left">
 	        </TextView>
         </LinearLayout>
-        <!-- Name Label -->
         <TextView
             android:id="@+id/sChannelNames"
             android:layout_width="fill_parent"
@@ -39,15 +38,14 @@
             android:textColor="#3BB1FF"
             android:textStyle="bold"
             android:paddingTop="2dip"
-            android:paddingBottom="2dip" >
+            android:paddingBottom="2dip">
 		</TextView>
-        <TextView
+		<TextView
 		    android:id="@+id/sDescription"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:textColor="#acacac"
-		    android:paddingBottom="2dip" >
+		    android:paddingBottom="2dip">
 		</TextView>
     </LinearLayout>
-
 </LinearLayout>
