@@ -9,35 +9,47 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 public class OAMobileActivity extends Activity {
 
-	String tabs[] = new String [] {"OASystem", "OANode", "OAAccounting", "OATask" };
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        
+//        String[] textArray={"one","two","asdasasdf asdf dsdaa"};
+//        int length=textArray.length;
+//        LinearLayout layout = new LinearLayout(this);
+//        setContentView(layout);
+//        layout.setOrientation(LinearLayout.VERTICAL);        
+//        for(int i=0;i<length;i++)
+//        {
+//            TextView tv=new TextView(getApplicationContext());
+//            tv.setText(textArray[i]);
+//            layout.addView(tv);
+//        }
+        
     	final ActionBar actionBar = getActionBar();
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 	    
 	    Tab tabA = actionBar.newTab();
-	    tabA.setText("OASystem");
-	    tabA.setTabListener(new TabListener<OASystemFragment>(this, "OASystems", OASystemFragment.class));
+	    tabA.setText("OANodes");
+	    tabA.setTabListener(new TabListener<OANodeFragment>(this, "OANodes", OANodeFragment.class));
 	    actionBar.addTab(tabA);
 	
-	    Tab tabD = actionBar.newTab();
-	    tabD.setText("OATask");
-	    tabD.setTabListener(new TabListener<OASystemFragment>(this, "OANodes", OASystemFragment.class));
-	    actionBar.addTab(tabD);
+	    Tab tabB = actionBar.newTab();
+	    tabB.setText("OATasks");
+	    tabB.setTabListener(new TabListener<OASystemFragment>(this, "OATasks", OASystemFragment.class));
+	    actionBar.addTab(tabB);
 	    
 	    Tab tabC = actionBar.newTab();
 	    tabC.setText("OAAcounting");
-	    tabC.setTabListener(new TabListener<OASystemFragment>(this, "OATask", OASystemFragment.class));
+	    tabC.setTabListener(new TabListener<OASystemFragment>(this, "OAAcounting", OASystemFragment.class));
 	    actionBar.addTab(tabC);
 	         
-	    if (savedInstanceState != null) {
+	    if(savedInstanceState != null) {
 	        int savedIndex = savedInstanceState.getInt("SAVED_INDEX");
 	        getActionBar().setSelectedNavigationItem(savedIndex);
 	    }

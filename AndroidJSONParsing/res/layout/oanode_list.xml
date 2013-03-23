@@ -12,21 +12,19 @@
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:orientation="horizontal">
-	        <!-- Cost Label -->
 	        <TextView
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:textColor="#5d5d5d"
+	            android:textColor="@color/Black"
 	            android:gravity="left"
 	            android:textStyle="bold"
-	            android:text="nestinator: " >
+	            android:text="Node ID: " >
 	        </TextView>
-	        <!-- Price Label -->
 	        <TextView
 	            android:id="@+id/sNodeId"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:textColor="#acacac" 
+	            android:textColor="@color/LightGrey" 
 	            android:textStyle="bold"
 	            android:gravity="left">
 	        </TextView>
@@ -44,7 +42,7 @@
 		    android:id="@+id/sDescription"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
-		    android:textColor="#acacac"
+		    android:textColor="@color/LightGrey"
 		    android:paddingBottom="2dip">
 		</TextView>
     </LinearLayout>

@@ -22,21 +22,12 @@
         
         <activity
             android:label="@string/app_name"
-            android:name=".OAMobileActivity" >
+            android:name=".OAItemExampleActivity" >
             <intent-filter >
                 <action android:name="com.androidhive.jsonparsing.MAIN_MENU" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-         <fragment
-            android:label="OASystem List Menu"
-            android:name=".OASystemFragment" >
-            <intent-filter >
-                <action android:name="com.androidhive.jsonparsing.MAIN_MENU" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </fragment>
         
         <activity
             android:label="OANode Single Item Menu"
