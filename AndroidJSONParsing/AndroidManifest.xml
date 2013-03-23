@@ -31,8 +31,8 @@
 
         <!-- Single List Item View -->
         <activity
-            android:label="Single Menu Item"
-            android:name=".SingleMenuItemActivity" >
+            android:label="OANode Single Item Menu"
+            android:name=".OANodeListActivity" >
         </activity>
     </application>
     

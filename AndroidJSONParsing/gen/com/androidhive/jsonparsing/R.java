@@ -178,10 +178,10 @@ public final class R {
         public static final int ic_menu_save=0x7f020006;
     }
     public static final class id {
-        public static final int but_oaaccounting=0x7f070009;
-        public static final int but_oanode=0x7f070008;
-        public static final int but_oasystem=0x7f070007;
-        public static final int but_oatask=0x7f07000a;
+        public static final int but_oaaccounting=0x7f070008;
+        public static final int but_oanode=0x7f070007;
+        public static final int but_oasystem=0x7f070006;
+        public static final int but_oatask=0x7f070009;
         public static final int email=0x7f070003;
         public static final int item_refresh=0x7f07000c;
         public static final int item_save=0x7f07000d;
@@ -191,7 +191,7 @@ public final class R {
         public static final int pb_loading_app=0x7f07000b;
         public static final int sChannelNames=0x7f070000;
         public static final int sDescription=0x7f070001;
-        public static final int sNodeId=0x7f070006;
+        public static final int sNodeId=0x7f07000a;
     }
     public static final class layout {
         public static final int fragment_a=0x7f030000;
@@ -200,10 +200,10 @@ public final class R {
         public static final int list_item=0x7f030003;
         public static final int main=0x7f030004;
         public static final int main_header=0x7f030005;
-        public static final int oanode_header=0x7f030006;
-        public static final int oanode_list=0x7f030007;
-        public static final int oanode_main=0x7f030008;
-        public static final int single_list_item=0x7f030009;
+        public static final int oamobile_menu=0x7f030006;
+        public static final int oanode_header=0x7f030007;
+        public static final int oanode_list=0x7f030008;
+        public static final int oanode_single_item=0x7f030009;
         public static final int splash=0x7f03000a;
     }
     public static final class menu {

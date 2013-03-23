@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class SingleMenuItemActivity  extends Activity {
+public class OANodeListActivity extends Activity {
 	
 	// JSON node keys
 	private static final String TAG_OANODES = "OANodes";
