@@ -31,7 +31,6 @@
 	            android:gravity="left">
 	        </TextView>
         </LinearLayout>
-        <!-- Name Label -->
         <TextView
             android:id="@+id/sChannelNames"
             android:layout_width="fill_parent"
@@ -39,8 +38,8 @@
             android:textColor="#3BB1FF"
             android:textStyle="bold"
             android:paddingTop="2dip"
-            android:paddingBottom="2dip" />
-        <!-- Linear layout for cost and price Cost: Rs.100 -->
+            android:paddingBottom="2dip">
+		</TextView>
 		<TextView
 		    android:id="@+id/sDescription"
 		    android:layout_width="fill_parent"

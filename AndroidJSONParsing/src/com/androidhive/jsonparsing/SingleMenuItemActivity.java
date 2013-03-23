@@ -8,9 +8,10 @@ import android.widget.TextView;
 public class SingleMenuItemActivity  extends Activity {
 	
 	// JSON node keys
-	private static final String TAG_IDX = "mIdx";
-	private static final String TAG_TIME = "mTimeTag";
-	private static final String TAG_DATA = "sData";
+	private static final String TAG_OANODES = "OANodes";
+	private static final String TAG_NODEID = "sNodeId";
+	private static final String TAG_CHANNEL_NAME = "sChannelNames";
+	private static final String TAG_DESCRIPTION = "sDescription";
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -21,14 +22,14 @@ public class SingleMenuItemActivity  extends Activity {
         Intent in = getIntent();
         
         // Get JSON values from previous intent
-        String name = in.getStringExtra(TAG_IDX);
-        String cost = in.getStringExtra(TAG_TIME);
-        String description = in.getStringExtra(TAG_DATA);
+        String name = in.getStringExtra(TAG_NODEID);
+        String cost = in.getStringExtra(TAG_CHANNEL_NAME);
+        String description = in.getStringExtra(TAG_DESCRIPTION);
         
         // Displaying all values on the screen
-        TextView lblName = (TextView) findViewById(R.id.name_label);
-        TextView lblCost = (TextView) findViewById(R.id.email_label);
-        TextView lblDesc = (TextView) findViewById(R.id.mobile_label);
+        TextView lblName = (TextView) findViewById(R.id.sNodeId);
+        TextView lblCost = (TextView) findViewById(R.id.sChannelNames);
+        TextView lblDesc = (TextView) findViewById(R.id.sDescription);
         
         lblName.setText(name);
         lblCost.setText(cost);

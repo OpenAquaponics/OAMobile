@@ -139,8 +139,7 @@ public class OANodeActivity extends ListActivity implements
         final ActionBar actionBar = getActionBar();
 		actionBar.show(); // ??
         
-		// selecting single ListView item
-		ListView lv = getListView();
+
 
 //        LayoutInflater inflater = getLayoutInflater();
 //        View header = inflater.inflate(R.layout.oanode_header, (ViewGroup) findViewById(R.id.oanode_header_layout));
@@ -153,10 +152,11 @@ public class OANodeActivity extends ListActivity implements
 				R.layout.oanode_list,
 				new String[] { TAG_NODEID, TAG_CHANNEL_NAME, TAG_DESCRIPTION }, new int[] {
 						R.id.sNodeId, R.id.sChannelNames, R.id.sDescription });
-
 		setListAdapter(adapter);
 
 
+		// selecting single ListView item
+		ListView lv = getListView();
 		
 		// Launching new screen on Selecting Single ListItem
 		lv.setOnItemClickListener(new OnItemClickListener() {

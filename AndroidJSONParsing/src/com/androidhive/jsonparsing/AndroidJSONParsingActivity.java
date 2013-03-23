@@ -10,9 +10,16 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 public class AndroidJSONParsingActivity extends Activity {
-    /** Called when the activity is first created. */
+    String tabs[] = new String [] {"OASystem", "OANode", "OAAccounting", "OATask" };
+	
+	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,27 +28,50 @@ public class AndroidJSONParsingActivity extends Activity {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         
         Tab tabA = actionBar.newTab();
-        tabA.setText("Tab A");
-        tabA.setTabListener(new TabListener<MyFragmentA>(this, "Tag A", MyFragmentA.class));
+        tabA.setText("OASystem");
+        tabA.setTabListener(new TabListener<MyFragmentA>(this, "OASystem", MyFragmentA.class));
         actionBar.addTab(tabA);
-        
-        Tab tabB = actionBar.newTab();
-        tabB.setText("Tab B");
-        tabB.setTabListener(new TabListener<MyFragmentB>(this, "Tag B", MyFragmentB.class));
-        actionBar.addTab(tabB);
+
+        Tab tabD = actionBar.newTab();
+        tabD.setText("OATask");
+        tabD.setTabListener(new TabListener<MyFragmentC>(this, "OATask", MyFragmentC.class));
+        actionBar.addTab(tabD);
         
         Tab tabC = actionBar.newTab();
-        tabC.setText("Tab C");
-        tabC.setTabListener(new TabListener<MyFragmentC>(this, "Tag C", MyFragmentC.class));
+        tabC.setText("OAAcounting");
+        tabC.setTabListener(new TabListener<MyFragmentB>(this, "OAAcounting", MyFragmentB.class));
         actionBar.addTab(tabC);
-        
+             
         if (savedInstanceState != null) {
             int savedIndex = savedInstanceState.getInt("SAVED_INDEX");
             getActionBar().setSelectedNavigationItem(savedIndex);
         }
-        
-    }
 
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // use an inflater to populate the ActionBar with items
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_activity, menu);
+        return true;
+    }
+    
+    @Override
+  	public boolean onOptionsItemSelected(MenuItem item){
+    	// same as using a normal menu
+    	switch(item.getItemId()) {
+    	case R.id.item_refresh:
+    		Toast.makeText(this, "Refreshing...", Toast.LENGTH_SHORT).show();
+    		break;
+    	case R.id.item_save:
+    		Toast.makeText(this, "Saving...", Toast.LENGTH_SHORT).show();
+    		break;
+    	}
+    	
+  		return true;
+  	}
+    
  @Override
  protected void onSaveInstanceState(Bundle outState) {
   // TODO Auto-generated method stub
