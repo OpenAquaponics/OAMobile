@@ -32,7 +32,7 @@
         <!-- Single List Item View -->
         <activity
             android:label="OANode Single Item Menu"
-            android:name=".OANodeListActivity" >
+            android:name=".OANodeSingleItemActivity" >
         </activity>
     </application>
     

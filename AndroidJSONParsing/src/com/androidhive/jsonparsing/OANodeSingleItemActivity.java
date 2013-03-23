@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.androidhive.jsonparsing.OAMobileTags;
 
 
-public class OANodeListActivity extends Activity implements OAMobileTags {
+public class OANodeSingleItemActivity extends Activity implements OAMobileTags {
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {

@@ -169,7 +169,7 @@ public class OAMobileActivity extends ListActivity implements
 				String sDescription = ((TextView) view.findViewById(R.id.sDescription)).getText().toString();
 				
 				// Starting new intent
-				Intent in = new Intent(getApplicationContext(), OANodeListActivity.class);
+				Intent in = new Intent(getApplicationContext(), OANodeSingleItemActivity.class);
 				in.putExtra(TAG_NODEID, sNodeId);
 				in.putExtra(TAG_CHANNEL_NAME, sChannelNames);
 				in.putExtra(TAG_DESCRIPTION, sDescription);

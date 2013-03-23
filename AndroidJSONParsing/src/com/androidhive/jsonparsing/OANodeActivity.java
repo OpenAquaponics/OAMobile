@@ -91,13 +91,20 @@ public class OANodeActivity extends ListActivity implements OAMobileTags {
 
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// Create the new Intent, pass the input data, and start the Activity
-				Intent in = new Intent(getApplicationContext(), OANodeListActivity.class);
+				Intent in = new Intent(getApplicationContext(), OANodeSingleItemActivity.class);
 				in.putExtra(NODEID, ((TextView) view.findViewById(R.id.sNodeId)).getText().toString());
 				in.putExtra(CHANNEL_NAME, ((TextView) view.findViewById(R.id.sChannelNames)).getText().toString());
 				in.putExtra(DESCRIPTION, ((TextView) view.findViewById(R.id.sDescription)).getText().toString());
 				startActivity(in);
 			}
 		});
+		
+
+		TextView tv = (TextView)findViewById(R.id.but_oanode);
+        tv.setTextColor(getResources().getColor(R.color.Green));
+        tv.setBackgroundColor(getResources().getColor(R.color.DarkGrey));
+		
+       
 	}
 
 	
