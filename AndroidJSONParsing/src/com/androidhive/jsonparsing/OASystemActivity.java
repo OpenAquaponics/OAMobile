@@ -91,7 +91,7 @@ public class OASystemActivity extends ListActivity implements
 		ArrayList<HashMap<String, String>> contactList = new ArrayList<HashMap<String, String>>();
 
 		// Creating JSON Parser instance
-		JSONParser jParser = new JSONParser();
+		// JSONParser jParser = new JSONParser();
 
 		// getting JSON string from URL
 		//JSONObject json = jParser.getJSONFromUrl(url);
@@ -169,7 +169,7 @@ public class OASystemActivity extends ListActivity implements
 				String sDescription = ((TextView) view.findViewById(R.id.sDescription)).getText().toString();
 				
 				// Starting new intent
-				Intent in = new Intent(getApplicationContext(), SingleMenuItemActivity.class);
+				Intent in = new Intent(getApplicationContext(), OANodeListActivity.class);
 				in.putExtra(TAG_NODEID, sNodeId);
 				in.putExtra(TAG_CHANNEL_NAME, sChannelNames);
 				in.putExtra(TAG_DESCRIPTION, sDescription);

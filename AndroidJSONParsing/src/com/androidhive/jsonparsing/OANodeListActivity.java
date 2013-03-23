@@ -5,14 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class OANodeListActivity extends Activity {
-	
-	// JSON node keys
-	private static final String TAG_OANODES = "OANodes";
-	private static final String TAG_NODEID = "sNodeId";
-	private static final String TAG_CHANNEL_NAME = "sChannelNames";
-	private static final String TAG_DESCRIPTION = "sDescription";
-	
+
+import com.androidhive.jsonparsing.OAMobileTags;
+
+
+public class OANodeListActivity extends Activity implements OAMobileTags {
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,9 +20,9 @@ public class OANodeListActivity extends Activity {
         Intent in = getIntent();
         
         // Get JSON values from previous intent
-        String name = in.getStringExtra(TAG_NODEID);
-        String cost = in.getStringExtra(TAG_CHANNEL_NAME);
-        String description = in.getStringExtra(TAG_DESCRIPTION);
+        String name = in.getStringExtra(NODEID);
+        String cost = in.getStringExtra(CHANNEL_NAME);
+        String description = in.getStringExtra(DESCRIPTION);
         
         // Displaying all values on the screen
         TextView lblName = (TextView) findViewById(R.id.sNodeId);

@@ -22,9 +22,6 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 
-import com.androidhive.jsonparsing.OAMobileTags;
-
-
 public class OANodeActivity extends ListActivity implements OAMobileTags {
 
 	// URL to OAServer
@@ -46,7 +43,7 @@ public class OANodeActivity extends ListActivity implements OAMobileTags {
 		ArrayList<HashMap<String, String>> OANodeViewList = new ArrayList<HashMap<String, String>>();
 
 		// Creating JSON Parser instance
-		JSONParser jParser = new JSONParser();
+		//JSONParser jParser = new JSONParser();
 
 		// getting JSON string from URL
 		//JSONObject json = jParser.getJSONFromUrl(url);
@@ -94,7 +91,7 @@ public class OANodeActivity extends ListActivity implements OAMobileTags {
 
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// Create the new Intent, pass the input data, and start the Activity
-				Intent in = new Intent(getApplicationContext(), SingleMenuItemActivity.class);
+				Intent in = new Intent(getApplicationContext(), OANodeListActivity.class);
 				in.putExtra(NODEID, ((TextView) view.findViewById(R.id.sNodeId)).getText().toString());
 				in.putExtra(CHANNEL_NAME, ((TextView) view.findViewById(R.id.sChannelNames)).getText().toString());
 				in.putExtra(DESCRIPTION, ((TextView) view.findViewById(R.id.sDescription)).getText().toString());
