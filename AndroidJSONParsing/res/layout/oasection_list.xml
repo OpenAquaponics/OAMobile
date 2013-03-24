@@ -6,7 +6,7 @@
 	android:orientation="vertical">
 
 	<include
-		android:id="@+id/list_item_section_text"
+		android:id="@+id/sSectionName"
 		layout="@android:layout/preference_category" />
 
 </LinearLayout>

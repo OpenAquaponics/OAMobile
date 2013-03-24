@@ -8,8 +8,8 @@ public interface OAMobileTags {
 	public static final String CHANNEL_NAME = "sChannelNames";
 	public static final String DESCRIPTION = "sDescription";
 	
-	public enum LIST_TYPE {
-		 SEPERATOR, OANODE, OASYSTEM, OACCOUNTING, OATASK ;
+	public enum ITEM_TYPE {
+		 SEPERATOR_LIST, OANODE_LIST, OASYSTEM_LIST, OACCOUNTING_LIST, OATASK_LIST;
 	}
 	
 }
