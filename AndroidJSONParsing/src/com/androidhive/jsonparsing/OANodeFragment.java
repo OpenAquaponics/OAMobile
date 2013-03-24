@@ -64,40 +64,16 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 		}
 		
 		try {
+			// This keeps getting reloaded!!!  Might need to go in another function or clear the view and rebuild it
+			
+			// TODO: The JSON items should be saved to a DB and then the UI View
+			//   should query the database instead of reading the raw JSON data
+			//   This let the View UI be dynamically filter based on SystemID, GroupId, etc
+			
 			// Extract the OANode JSON object array
 			OANodeArray = json.getJSONArray(OANODES);
 			
-	        items.add(new OASectionItem("OASystem: R4T43DF"));
-			// Loop through all of the ONNode JSON objects
-			for(int i = 0; i < OANodeArray.length(); i++){
-			
-				// Extract the current JSON object
-				OANode = OANodeArray.getJSONObject(i);
-				
-				// Create new HashList and add the OANode JSON object
-				map.clear();
-				map.put(NODEID, OANode.getString(NODEID));
-				map.put(CHANNEL_NAME, OANode.getString(CHANNEL_NAME));
-				map.put(DESCRIPTION, OANode.getString(DESCRIPTION));
-				items.add(new OANodeItem(map));
-			}
-			
-	        items.add(new OASectionItem("OASystem: KD42WD98"));
-			// Loop through all of the ONNode JSON objects
-			for(int i = 0; i < OANodeArray.length(); i++){
-			
-				// Extract the current JSON object
-				OANode = OANodeArray.getJSONObject(i);
-				
-				// Create new HashList and add the OANode JSON object
-				map.clear();
-				map.put(NODEID, OANode.getString(NODEID));
-				map.put(CHANNEL_NAME, OANode.getString(CHANNEL_NAME));
-				map.put(DESCRIPTION, OANode.getString(DESCRIPTION));
-				items.add(new OANodeItem(map));
-			}
-			
-	        items.add(new OASectionItem("OASystem: ADS7523"));
+	        items.add(new OASectionItem("OASystem: IK89EQ2"));
 			// Loop through all of the ONNode JSON objects
 			for(int i = 0; i < OANodeArray.length(); i++){
 			
