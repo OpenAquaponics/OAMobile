@@ -36,10 +36,6 @@ public class OAItemExampleActivity extends ListActivity implements OAMobileTags 
         super.onCreate(savedInstanceState);
 		HashMap<String, String> map = new HashMap<String, String>();
 
-
-		// Hashmap for ListView
-		ArrayList<HashMap<String, String>> OANodeViewList = new ArrayList<HashMap<String, String>>();
-		
 		// Creating JSON Parser instance
 		JSONParser jParser = new JSONParser();
 		JSONObject json = null;

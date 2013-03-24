@@ -14,13 +14,11 @@ public class OAEntryAdapter extends ArrayAdapter<OAItem> implements OAMobileTags
 
 	private Context context;
 	private ArrayList<OAItem> items;
-	private LayoutInflater vi;
 
-	public OAEntryAdapter(Context context,ArrayList<OAItem> items) {
+	public OAEntryAdapter(Context context, ArrayList<OAItem> items) {
 		super(context, 0, items);
 		this.context = context;
 		this.items = items;
-		this.vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 

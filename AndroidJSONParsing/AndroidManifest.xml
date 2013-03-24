@@ -22,7 +22,7 @@
         
         <activity
             android:label="@string/app_name"
-            android:name=".OAItemExampleActivity" >
+            android:name=".OAMobileActivity" >
             <intent-filter >
                 <action android:name="com.androidhive.jsonparsing.MAIN_MENU" />
                 <category android:name="android.intent.category.DEFAULT" />
