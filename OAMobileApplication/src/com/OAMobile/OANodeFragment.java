@@ -1,7 +1,4 @@
-// This template example was borrowed from: http://www.androidhive.info/2012/01/android-json-parsing-tutorial/
-//   Using this application as a template for building the OAMobile application
-
-package com.androidhive.jsonparsing;
+package com.OAMobile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,10 +7,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.androidhive.jsonparsing.OAItem.OAEntryAdapter;
-import com.androidhive.jsonparsing.OAItem.OAItem;
-import com.androidhive.jsonparsing.OAItem.OANodeItem;
-import com.androidhive.jsonparsing.OAItem.OASectionItem;
+import com.OAMobile.OAItem.OAEntryAdapter;
+import com.OAMobile.OAItem.OAItem;
+import com.OAMobile.OAItem.OANodeItem;
+import com.OAMobile.OAItem.OASectionItem;
 
 import android.os.Bundle;
 import android.app.AlertDialog;

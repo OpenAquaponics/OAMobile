@@ -1,4 +1,4 @@
-package com.androidhive.jsonparsing;
+package com.OAMobile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,10 +13,10 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.androidhive.jsonparsing.OAItem.OAItem;
-import com.androidhive.jsonparsing.OAItem.OASectionItem;
-import com.androidhive.jsonparsing.OAItem.OANodeItem;
-import com.androidhive.jsonparsing.OAItem.OAEntryAdapter;
+import com.OAMobile.OAItem.OAItem;
+import com.OAMobile.OAItem.OASectionItem;
+import com.OAMobile.OAItem.OANodeItem;
+import com.OAMobile.OAItem.OAEntryAdapter;
 
 public class OAItemExampleActivity extends ListActivity implements OAMobileTags {
     /** Called when the activity is first created. */

@@ -1,4 +1,4 @@
-package com.androidhive.jsonparsing;
+package com.OAMobile;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;

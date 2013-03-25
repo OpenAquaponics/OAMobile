@@ -1,5 +1,4 @@
-
-package com.androidhive.jsonparsing;
+package com.OAMobile;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.androidhive.jsonparsing;
+package com.OAMobile;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 
-import com.androidhive.jsonparsing.OAMobileTags;
+import com.OAMobile.OAMobileTags;
 
 
 public class OANodeSingleItemActivity extends Activity implements OAMobileTags {

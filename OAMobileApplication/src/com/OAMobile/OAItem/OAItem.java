@@ -1,9 +1,9 @@
-package com.androidhive.jsonparsing.OAItem;
+package com.OAMobile.OAItem;
 
 import android.content.Context;
 import android.view.View;
 
-import com.androidhive.jsonparsing.OAMobileTags;
+import com.OAMobile.OAMobileTags;
 
 public interface OAItem extends OAMobileTags{
 	

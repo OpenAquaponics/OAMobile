@@ -1,12 +1,12 @@
-package com.androidhive.jsonparsing.OAItem;
+package com.OAMobile.OAItem;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.androidhive.jsonparsing.OAMobileTags;
-import com.androidhive.jsonparsing.R;
+import com.OAMobile.OAMobileTags;
+import com.OAMobile.R;
 
 public class OASectionItem implements OAItem, OAMobileTags {
 

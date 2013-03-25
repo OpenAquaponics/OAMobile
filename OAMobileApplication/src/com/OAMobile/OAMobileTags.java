@@ -1,4 +1,4 @@
-package com.androidhive.jsonparsing;
+package com.OAMobile;
 
 
 public interface OAMobileTags {

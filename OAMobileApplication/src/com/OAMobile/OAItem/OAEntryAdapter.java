@@ -1,8 +1,8 @@
-package com.androidhive.jsonparsing.OAItem;
+package com.OAMobile.OAItem;
 
 import java.util.ArrayList;
 
-import com.androidhive.jsonparsing.OAMobileTags;
+import com.OAMobile.OAMobileTags;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
