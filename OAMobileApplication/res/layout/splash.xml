@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/White" >
+        
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="OpenAquaponics"
+        android:background="@color/White"
+        android:textColor="@color/Black"
+        android:textSize="28dp"
+        android:gravity="center_horizontal"
+        android:paddingTop="100dp"
+        android:paddingBottom="100dp" />
+
+
+    
+   	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="horizontal">
+    	<TextView
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="15"
+	        android:background="@color/White" />
+	        
+	    <ProgressBar
+	        android:id="@+id/pb_loading_app"
+	        style="?android:attr/progressBarStyleHorizontal"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="70"
+	        android:progress="0"
+	    	android:max="100" />
+	    
+    	<TextView
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="15"
+	        android:background="@color/White" />
+
+  	</LinearLayout>
+
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    
+</LinearLayout>
