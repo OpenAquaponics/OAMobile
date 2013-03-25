@@ -35,18 +35,18 @@ public class OAMobileActivity extends Activity {
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 	    
 	    Tab tabA = actionBar.newTab();
-	    tabA.setText("OANodes");
-	    tabA.setTabListener(new TabListener<OANodeFragment>(this, "OANodes", OANodeFragment.class));
+	    tabA.setText("Nodes");
+	    tabA.setTabListener(new TabListener<OANodeFragment>(this, "Nodes", OANodeFragment.class));
 	    actionBar.addTab(tabA);
 	
 	    Tab tabB = actionBar.newTab();
-	    tabB.setText("OATasks");
-	    tabB.setTabListener(new TabListener<OASystemFragment>(this, "OATasks", OASystemFragment.class));
+	    tabB.setText("Tasks");
+	    tabB.setTabListener(new TabListener<OASystemFragment>(this, "Tasks", OASystemFragment.class));
 	    actionBar.addTab(tabB);
 	    
 	    Tab tabC = actionBar.newTab();
-	    tabC.setText("OAAcounting");
-	    tabC.setTabListener(new TabListener<OASystemFragment>(this, "OAAcounting", OASystemFragment.class));
+	    tabC.setText("Accounting");
+	    tabC.setTabListener(new TabListener<OASystemFragment>(this, "Accounting", OASystemFragment.class));
 	    actionBar.addTab(tabC);
 	         
 	    if(savedInstanceState != null) {
