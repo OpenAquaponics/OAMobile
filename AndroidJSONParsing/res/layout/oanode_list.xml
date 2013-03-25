@@ -1,50 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">  
+    android:layout_width="fill_parent"
+    android:orientation="horizontal"
+    android:background="@color/White" >
+     
     <LinearLayout
-        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
         android:orientation="vertical"
-    	android:background="#FFFFFF">
+    	android:paddingLeft="5dp">
+    	
+        <!-- The OANode heading  -->
    		<LinearLayout
-	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
+	        android:layout_width="fill_parent"
 	        android:orientation="horizontal">
-	        <TextView
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:textColor="@color/Black"
-	            android:gravity="left"
-	            android:textStyle="bold"
-	            android:text="Node ID: " >
-	        </TextView>
-	        <TextView
-	            android:id="@+id/sNodeId"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:textColor="@color/LightGrey" 
-	            android:textStyle="bold"
-	            android:gravity="left">
-	        </TextView>
+		    <LinearLayout
+		        android:layout_height="wrap_content"
+		        android:layout_width="0dp"
+		        android:layout_weight="0.5"
+		        android:orientation="horizontal">
+  		    	<TextView
+		            android:layout_height="wrap_content"
+		            android:layout_width="wrap_content"
+		            android:textColor="@color/Black"
+		            android:gravity="left"
+		            android:textStyle="bold"
+		            android:text="Node ID: " >
+		        </TextView>
+		        <TextView
+		            android:id="@+id/sNodeId"
+		            android:layout_height="wrap_content"
+		            android:layout_width="wrap_content"
+		            android:textColor="@color/LightGrey" 
+		            android:textStyle="bold"
+		            android:gravity="left">
+		        </TextView>
+        	</LinearLayout>
+		    <LinearLayout
+		        android:layout_height="wrap_content"
+		        android:layout_width="0dp"
+		        android:layout_weight="0.25"
+		        android:orientation="horizontal">
+  		    	<TextView
+		            android:layout_height="wrap_content"
+		            android:layout_width="wrap_content"
+		            android:textColor="@color/Black"
+		            android:gravity="left"
+		            android:textStyle="bold"
+		            android:text="Public: " >
+		        </TextView>
+		        <TextView
+		            android:id="@+id/bPublic"
+		            android:layout_height="wrap_content"
+		            android:layout_width="wrap_content"
+		            android:textColor="@color/LightGrey" 
+		            android:textStyle="bold"
+		            android:gravity="left">
+		        </TextView>
+        	</LinearLayout>
+		    <LinearLayout
+		        android:layout_height="wrap_content"
+		        android:layout_width="0dp"
+		        android:layout_weight="0.25"
+		        android:orientation="horizontal">
+  		    	<TextView
+		            android:layout_height="wrap_content"
+		            android:layout_width="wrap_content"
+		            android:textColor="@color/Black"
+		            android:gravity="left"
+		            android:textStyle="bold"
+		            android:text="Enabled: " >
+		        </TextView>
+		        <TextView
+		            android:id="@+id/bEnable"
+		            android:layout_height="wrap_content"
+		            android:layout_width="wrap_content"
+		            android:textColor="@color/LightGrey" 
+		            android:textStyle="bold"
+		            android:gravity="left">
+		        </TextView>
+        	</LinearLayout>
         </LinearLayout>
-        <TextView
-            android:id="@+id/sChannelNames"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#3BB1FF"
-            android:textStyle="bold"
-            android:paddingTop="2dip"
-            android:paddingBottom="2dip">
-		</TextView>
-		<TextView
-		    android:id="@+id/sDescription"
-		    android:layout_width="fill_parent"
+        
+   		<!-- The subset informational data under the OANode heading -->
+        <RelativeLayout
+		    android:layout_width="fill_parent" 
 		    android:layout_height="wrap_content"
-		    android:textColor="@color/LightGrey"
-		    android:paddingBottom="2dip">
-		</TextView>
+		    android:paddingLeft="10dp">
+		    <LinearLayout
+		        android:layout_height="wrap_content"
+		        android:layout_width="fill_parent"
+		        android:orientation="vertical" >
+		        <TextView
+		            android:id="@+id/sDescription"
+		            android:layout_height="wrap_content"
+			        android:layout_width="wrap_content"
+		            android:textColor="@color/LightBlue"
+		            android:textStyle="bold" >
+				</TextView>
+				<TextView
+				    android:id="@+id/sChannelNames"
+				    android:layout_width="fill_parent"
+				    android:layout_height="wrap_content"
+				    android:textColor="@color/LightGrey" >
+				</TextView>
+		    </LinearLayout>
+		</RelativeLayout>
+		
     </LinearLayout>
-
+    
 </LinearLayout>

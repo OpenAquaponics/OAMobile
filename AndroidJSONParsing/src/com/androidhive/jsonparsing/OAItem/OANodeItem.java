@@ -29,8 +29,8 @@ public class OANodeItem implements OAItem, OAMobileTags {
 			LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View v = vi.inflate(R.layout.oanode_list, null);
 
-			((TextView)v.findViewById(R.id.sNodeId)).setText((String) map.get(NODEID));
-			((TextView)v.findViewById(R.id.sChannelNames)).setText((String) map.get(CHANNEL_NAME));
+			((TextView)v.findViewById(R.id.sNodeId)).setText((String) map.get(NODE_ID));
+			((TextView)v.findViewById(R.id.sChannelNames)).setText((String) map.get(CHANNEL_NAMES));
 			((TextView)v.findViewById(R.id.sDescription)).setText((String) map.get(DESCRIPTION));
 			
 			return v;

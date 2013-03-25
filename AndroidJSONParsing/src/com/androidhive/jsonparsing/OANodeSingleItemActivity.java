@@ -20,8 +20,8 @@ public class OANodeSingleItemActivity extends Activity implements OAMobileTags {
         Intent in = getIntent();
         
         // Get JSON values from previous intent
-        String name = in.getStringExtra(NODEID);
-        String cost = in.getStringExtra(CHANNEL_NAME);
+        String name = in.getStringExtra(NODE_ID);
+        String cost = in.getStringExtra(CHANNEL_NAMES);
         String description = in.getStringExtra(DESCRIPTION);
         
         // Displaying all values on the screen

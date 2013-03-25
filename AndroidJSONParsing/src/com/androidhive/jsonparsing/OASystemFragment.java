@@ -68,8 +68,8 @@ public class OASystemFragment extends ListFragment implements OAMobileTags {
 				
 				// Create new HashList and add the OANode JSON object
 				HashMap<String, String> map = new HashMap<String, String>();
-				map.put(NODEID, OANode.getString(NODEID));
-				map.put(CHANNEL_NAME, OANode.getString(CHANNEL_NAME));
+				map.put(NODE_ID, OANode.getString(NODE_ID));
+				map.put(CHANNEL_NAMES, OANode.getString(CHANNEL_NAMES));
 				map.put(DESCRIPTION, OANode.getString(DESCRIPTION));
 
 				// Add HashList to OANodeList ArrayList
@@ -82,7 +82,7 @@ public class OASystemFragment extends ListFragment implements OAMobileTags {
 		// Populate the OANodeViewList UI elements
 		if(getActivity() != null) {
 			ListAdapter adapter = new SimpleAdapter(getActivity(), OANodeViewList, R.layout.oasystem_list,
-					new String[] { NODEID, CHANNEL_NAME, DESCRIPTION },
+					new String[] { NODE_ID, CHANNEL_NAMES, DESCRIPTION },
 					new int[] {	R.id.sNodeId, R.id.sChannelNames, R.id.sDescription });
 			setListAdapter(adapter);
 		}
@@ -94,8 +94,8 @@ public class OASystemFragment extends ListFragment implements OAMobileTags {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// Create the new Intent, pass the input data, and start the Activity
 				Intent in = new Intent(getActivity().getApplicationContext(), OANodeSingleItemActivity.class);
-				in.putExtra(NODEID, ((TextView) view.findViewById(R.id.sNodeId)).getText().toString());
-				in.putExtra(CHANNEL_NAME, ((TextView) view.findViewById(R.id.sChannelNames)).getText().toString());
+				in.putExtra(NODE_ID, ((TextView) view.findViewById(R.id.sNodeId)).getText().toString());
+				in.putExtra(CHANNEL_NAMES, ((TextView) view.findViewById(R.id.sChannelNames)).getText().toString());
 				in.putExtra(DESCRIPTION, ((TextView) view.findViewById(R.id.sDescription)).getText().toString());
 				startActivity(in);
 			}

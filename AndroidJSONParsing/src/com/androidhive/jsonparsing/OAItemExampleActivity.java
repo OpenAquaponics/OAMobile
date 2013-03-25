@@ -59,8 +59,8 @@ public class OAItemExampleActivity extends ListActivity implements OAMobileTags 
 				
 				// Create new HashList and add the OANode JSON object
 				map.clear();
-				map.put(NODEID, OANode.getString(NODEID));
-				map.put(CHANNEL_NAME, OANode.getString(CHANNEL_NAME));
+				map.put(NODE_ID, OANode.getString(NODE_ID));
+				map.put(CHANNEL_NAMES, OANode.getString(CHANNEL_NAMES));
 				map.put(DESCRIPTION, OANode.getString(DESCRIPTION));
 				items.add(new OANodeItem(map));
 			}
@@ -74,8 +74,8 @@ public class OAItemExampleActivity extends ListActivity implements OAMobileTags 
 				
 				// Create new HashList and add the OANode JSON object
 				map.clear();
-				map.put(NODEID, OANode.getString(NODEID));
-				map.put(CHANNEL_NAME, OANode.getString(CHANNEL_NAME));
+				map.put(NODE_ID, OANode.getString(NODE_ID));
+				map.put(CHANNEL_NAMES, OANode.getString(CHANNEL_NAMES));
 				map.put(DESCRIPTION, OANode.getString(DESCRIPTION));
 				items.add(new OANodeItem(map));
 			}
