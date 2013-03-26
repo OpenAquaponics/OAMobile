@@ -30,7 +30,7 @@
         </activity>
         
         <activity
-            android:label="OANode Single Item Menu"
+            android:label="OANode Data Plot Menu"
             android:name=".OANodeSingleItemActivity" >
         </activity>
     </application>

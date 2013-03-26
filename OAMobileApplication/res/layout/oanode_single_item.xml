@@ -7,10 +7,10 @@
 	<TextView android:id="@+id/sNodeId"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:textSize="25dip"
+		android:textSize="25dp"
 		android:textStyle="bold"
-		android:paddingTop="10dip"
-		android:paddingBottom="10dip"
+		android:paddingTop="10dp"
+		android:paddingBottom="10dp"
 		android:textColor="#43bd00"/>
 	<TextView android:id="@+id/sChannelNames"
 		android:layout_width="fill_parent"

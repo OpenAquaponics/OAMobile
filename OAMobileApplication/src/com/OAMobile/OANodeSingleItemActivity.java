@@ -18,8 +18,6 @@ import android.widget.TextView;
 
 
 import com.OAMobile.OAMobileTags;
-import com.OAMobile.OAItem.OANodeItem;
-import com.OAMobile.OAItem.OASectionItem;
 
 
 public class OANodeSingleItemActivity extends Activity implements OAMobileTags {
@@ -42,35 +40,55 @@ public class OANodeSingleItemActivity extends Activity implements OAMobileTags {
         String name = in.getStringExtra(NODE_ID);
         String data = in.getStringExtra(OADATA);
         String description = in.getStringExtra(DESCRIPTION);
+
         
 		if (mChart == null) {
 	        mCurrentSeries = new XYSeries(name);
-	        mDataset.addSeries(mCurrentSeries);
 	        mCurrentRenderer = new XYSeriesRenderer();
-	        mRenderer.addSeriesRenderer(mCurrentRenderer);
-        }
-        
-    	// contacts JSONArray
-    	JSONArray OANodeArray = null;
-    	JSONObject OANode = null;
-		JSONObject json = null;
-		
-		try {
-			json = new JSONObject(data);
-			OANodeArray = json.getJSONArray(OADATA);
-
-			// Loop through all of the ONNode JSON objects
-			for(int i = 0; i < OANodeArray.length(); i++){
-				// Extract the current JSON object
-				OANode = OANodeArray.getJSONObject(i);
-		        mCurrentSeries.add(OANode.getDouble(TIME_TAG), (double)i);
-		        //mCurrentSeries.add((double)i, (double)i*2);
+	        mDataset.addSeries(0, mCurrentSeries);
+	        mRenderer.addSeriesRenderer(0, mCurrentRenderer);
+	        
+	        mDataset.addSeries(1, mCurrentSeries);
+	        mRenderer.addSeriesRenderer(1, mCurrentRenderer);
+	        
+	        mRenderer.setLabelsTextSize(30);
+	        mRenderer.setLabelsColor(10);
+	        mRenderer.setLegendTextSize(30);
+	        mRenderer.setLegendHeight(50);
+	        mRenderer.setYTitle("Raw ADC counts");
+	        mRenderer.setChartTitle("Raw data plots");
+	        mRenderer.setFitLegend(true);
+	        mRenderer.setShowLabels(true);
+	        mRenderer.setXLabelsAngle((float) 45.0);
+	        mRenderer.setMargins(new int[] {100, 100, 100, 100});
+	        
+	    	// contacts JSONArray
+	    	JSONArray OANodeArray = null;
+	    	JSONObject OANode = null;
+			JSONObject json = null;
+			
+			try {
+				json = new JSONObject(data);
+				OANodeArray = json.getJSONArray(OADATA);
+	
+				// Loop through all of the ONNode JSON objects
+				for(int i = 0; i < OANodeArray.length(); i++){
+					// Extract the current JSON object
+					OANode = OANodeArray.getJSONObject(i);
+					//List<Integer> val = (List<Integer>) Arrays.asList(Integer.parseInt(OANode.getString(DATA).split(",")));
+					String[] strarr = OANode.getString(DATA).split(",");
+					int[] intArray = new int[strarr.length];
+					for(int j = 0; j < strarr.length; j++) {
+					    intArray[j] = Integer.parseInt(strarr[j]);
+					}
+			        mCurrentSeries.add(OANode.getDouble(TIME_TAG), (double)intArray[0]);
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
+        }
+		
         // Displaying all values on the screen
         TextView lblName = (TextView) findViewById(R.id.sNodeId);
         TextView lblDesc = (TextView) findViewById(R.id.sDescription);
