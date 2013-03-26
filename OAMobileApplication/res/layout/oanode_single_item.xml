@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
-  <TextView android:id="@+id/sNodeId"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="25dip"
-            android:textStyle="bold"
-            android:paddingTop="10dip"
-            android:paddingBottom="10dip"
-            android:textColor="#43bd00"/>
-  <TextView android:id="@+id/sChannelNames"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#acacac"/>
-  <TextView android:id="@+id/sDescription"
-      		android:layout_width="fill_parent"
-      		android:layout_height="wrap_content"
-      		android:textStyle="bold"/>
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<TextView android:id="@+id/sNodeId"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textSize="25dip"
+		android:textStyle="bold"
+		android:paddingTop="10dip"
+		android:paddingBottom="10dip"
+		android:textColor="#43bd00"/>
+	<TextView android:id="@+id/sChannelNames"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textColor="#acacac"/>
+	<TextView android:id="@+id/sDescription"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textStyle="bold"/>
+	<LinearLayout android:id="@+id/chart"
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent" />
 </LinearLayout>

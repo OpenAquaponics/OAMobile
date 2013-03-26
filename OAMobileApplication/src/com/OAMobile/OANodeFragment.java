@@ -156,6 +156,7 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 				Intent in = new Intent(getActivity().getApplicationContext(), OANodeSingleItemActivity.class);
 				in.putExtra(NODE_ID, ((TextView) view.findViewById(R.id.sNodeId)).getText().toString());
 				in.putExtra(DESCRIPTION, ((TextView) view.findViewById(R.id.sDescription)).getText().toString());
+				in.putExtra(OADATA, json_data);  // This should be optional, otherwise the activity queries the REST server
 				startActivity(in);
 			}
 		});
