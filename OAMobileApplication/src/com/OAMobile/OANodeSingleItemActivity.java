@@ -1,5 +1,7 @@
 package com.OAMobile;
 
+import java.util.Date;
+
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
 import org.achartengine.model.XYMultipleSeriesDataset;
@@ -13,6 +15,8 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -35,6 +39,7 @@ public class OANodeSingleItemActivity extends Activity implements OAMobileTags {
         
         // getting intent data
         Intent in = getIntent();
+        java.text.DateFormat df = android.text.format.DateFormat.getDateFormat(getApplicationContext());
         
         // Get JSON values from previous intent
         String name = in.getStringExtra(NODE_ID);
@@ -50,6 +55,10 @@ public class OANodeSingleItemActivity extends Activity implements OAMobileTags {
 	        
 	        mDataset.addSeries(1, mCurrentSeries);
 	        mRenderer.addSeriesRenderer(1, mCurrentRenderer);
+
+	        mRenderer.setFitLegend(true);
+	        mRenderer.setShowLabels(true);
+	        mRenderer.setApplyBackgroundColor(true);
 	        
 	        mRenderer.setLabelsTextSize(30);
 	        mRenderer.setLabelsColor(10);
@@ -57,10 +66,15 @@ public class OANodeSingleItemActivity extends Activity implements OAMobileTags {
 	        mRenderer.setLegendHeight(50);
 	        mRenderer.setYTitle("Raw ADC counts");
 	        mRenderer.setChartTitle("Raw data plots");
-	        mRenderer.setFitLegend(true);
-	        mRenderer.setShowLabels(true);
+
 	        mRenderer.setXLabelsAngle((float) 45.0);
-	        mRenderer.setMargins(new int[] {100, 100, 100, 100});
+	        mRenderer.setMargins(new int[] {50, 100, 150, 50});
+	        mRenderer.setShowGrid(true);
+	        mRenderer.setGridColor(getResources().getColor(R.color.DarkGrey));
+	        mRenderer.setBackgroundColor(getResources().getColor(R.color.ReallyLightGrey));
+	        mRenderer.setAxesColor(getResources().getColor(R.color.Black));
+	        mRenderer.setMarginsColor(getResources().getColor(R.color.White));
+	        mRenderer.setLabelsColor(getResources().getColor(R.color.Black));
 	        
 	    	// contacts JSONArray
 	    	JSONArray OANodeArray = null;
@@ -81,7 +95,13 @@ public class OANodeSingleItemActivity extends Activity implements OAMobileTags {
 					for(int j = 0; j < strarr.length; j++) {
 					    intArray[j] = Integer.parseInt(strarr[j]);
 					}
+					
 			        mCurrentSeries.add(OANode.getDouble(TIME_TAG), (double)intArray[0]);
+			        mRenderer.addXTextLabel(OANode.getDouble(TIME_TAG), df.format(new Date((long) (OANode.getDouble(TIME_TAG)*1000L))));
+			        
+
+			        Log.d("Date", OANode.getString(TIME_TAG));
+			        Log.d("Date", df.format(new Date((long) (OANode.getDouble(TIME_TAG)*1000L))));
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -108,6 +128,5 @@ public class OANodeSingleItemActivity extends Activity implements OAMobileTags {
             mChart.repaint();
         }
     }
-    
 
 }

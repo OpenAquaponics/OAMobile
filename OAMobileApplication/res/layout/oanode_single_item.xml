@@ -3,25 +3,30 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="match_parent"
+    android:background="@color/White"
+   	android:paddingTop="2dp" >
+   	
 	<TextView android:id="@+id/sNodeId"
-		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:textSize="25dp"
+		android:layout_width="wrap_content"
+		android:textSize="18dp"
 		android:textStyle="bold"
-		android:paddingTop="10dp"
-		android:paddingBottom="10dp"
-		android:textColor="#43bd00"/>
-	<TextView android:id="@+id/sChannelNames"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:textColor="#acacac"/>
+		android:textColor="@color/LightGrey" 
+		android:gravity="left"
+		android:paddingLeft="10dp" />
+	
 	<TextView android:id="@+id/sDescription"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:textStyle="bold"/>
+		android:textColor="@color/LightBlue"
+        android:textStyle="bold"
+        android:paddingLeft="20dp"
+        android:paddingBottom="2dp" />
+	
 	<LinearLayout android:id="@+id/chart"
 		android:orientation="vertical"
 		android:layout_width="fill_parent"
-		android:layout_height="fill_parent" />
+		android:layout_height="fill_parent"
+		android:textColor="@color/LightGrey"  />
 </LinearLayout>
