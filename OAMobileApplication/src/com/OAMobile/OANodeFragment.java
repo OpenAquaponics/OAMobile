@@ -153,7 +153,7 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// Create the new Intent, pass the input data, and start the Activity
-				Intent in = new Intent(getActivity().getApplicationContext(), OANodeSingleItemActivity.class);
+				Intent in = new Intent(getActivity().getApplicationContext(), OANodeItemChartActivity.class);
 				in.putExtra(NODE_ID, ((TextView) view.findViewById(R.id.sNodeId)).getText().toString());
 				in.putExtra(DESCRIPTION, ((TextView) view.findViewById(R.id.sDescription)).getText().toString());
 				in.putExtra(OADATA, json_data);  // This should be optional, otherwise the activity queries the REST server

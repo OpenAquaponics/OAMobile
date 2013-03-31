@@ -90,7 +90,7 @@ public class OASystemFragment extends ListFragment implements OAMobileTags {
 
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// Create the new Intent, pass the input data, and start the Activity
-				Intent in = new Intent(getActivity().getApplicationContext(), OANodeSingleItemActivity.class);
+				Intent in = new Intent(getActivity().getApplicationContext(), OANodeItemChartActivity.class);
 				in.putExtra(NODE_ID, ((TextView) view.findViewById(R.id.sNodeId)).getText().toString());
 				in.putExtra(CHANNEL_NAMES, ((TextView) view.findViewById(R.id.sChannelNames)).getText().toString());
 				in.putExtra(DESCRIPTION, ((TextView) view.findViewById(R.id.sDescription)).getText().toString());

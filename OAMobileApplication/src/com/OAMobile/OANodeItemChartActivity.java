@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
+import org.achartengine.chart.PointStyle;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
@@ -14,8 +15,8 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint.Align;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,18 +25,18 @@ import android.widget.TextView;
 import com.OAMobile.OAMobileTags;
 
 
-public class OANodeSingleItemActivity extends Activity implements OAMobileTags {
+public class OANodeItemChartActivity extends Activity implements OAMobileTags {
 
     private GraphicalView mChart;
     private XYMultipleSeriesDataset mDataset = new XYMultipleSeriesDataset();
     private XYMultipleSeriesRenderer mRenderer = new XYMultipleSeriesRenderer();
-    private XYSeries mCurrentSeries;
-    private XYSeriesRenderer mCurrentRenderer;
+    private XYSeries[] mCurrentSeries = new XYSeries[2];
+    private XYSeriesRenderer[] mCurrentRenderer = new XYSeriesRenderer[2];
     
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.oanode_single_item);
+        setContentView(R.layout.oanode_item_chart);
         
         // getting intent data
         Intent in = getIntent();
@@ -48,28 +49,38 @@ public class OANodeSingleItemActivity extends Activity implements OAMobileTags {
 
         
 		if (mChart == null) {
-	        mCurrentSeries = new XYSeries(name);
-	        mCurrentRenderer = new XYSeriesRenderer();
-	        mDataset.addSeries(0, mCurrentSeries);
-	        mRenderer.addSeriesRenderer(0, mCurrentRenderer);
-	        
-	        mDataset.addSeries(1, mCurrentSeries);
-	        mRenderer.addSeriesRenderer(1, mCurrentRenderer);
+			for(int i = 0; i < mCurrentSeries.length; i++) {
+		        mCurrentSeries[i] = new XYSeries(name);
+		        mCurrentRenderer[i] = new XYSeriesRenderer();
+		        //mCurrentRenderer[i].setPointStyle(PointStyle.TRIANGLE);
 
+		        mDataset.addSeries(i, mCurrentSeries[i]);
+		        mRenderer.addSeriesRenderer(i, mCurrentRenderer[i]);
+			}
+			
+			mCurrentRenderer[0].setColor(getResources().getColor(R.color.Black));
+			mCurrentRenderer[1].setColor(getResources().getColor(R.color.Red));
+			//mCurrentRenderer[2].setColor(getResources().getColor(R.color.Blue));
+			
 	        mRenderer.setFitLegend(true);
 	        mRenderer.setShowLabels(true);
 	        mRenderer.setApplyBackgroundColor(true);
+	        mRenderer.setShowGrid(true);
 	        
 	        mRenderer.setLabelsTextSize(30);
 	        mRenderer.setLabelsColor(10);
 	        mRenderer.setLegendTextSize(30);
 	        mRenderer.setLegendHeight(50);
 	        mRenderer.setYTitle("Raw ADC counts");
+	        mRenderer.setYAxisAlign(Align.LEFT, 0);
 	        mRenderer.setChartTitle("Raw data plots");
+	        mRenderer.setChartTitleTextSize(30);
+	        //715, 730
 
 	        mRenderer.setXLabelsAngle((float) 45.0);
 	        mRenderer.setMargins(new int[] {50, 100, 150, 50});
-	        mRenderer.setShowGrid(true);
+
+	        
 	        mRenderer.setGridColor(getResources().getColor(R.color.DarkGrey));
 	        mRenderer.setBackgroundColor(getResources().getColor(R.color.ReallyLightGrey));
 	        mRenderer.setAxesColor(getResources().getColor(R.color.Black));
@@ -92,15 +103,19 @@ public class OANodeSingleItemActivity extends Activity implements OAMobileTags {
 					//List<Integer> val = (List<Integer>) Arrays.asList(Integer.parseInt(OANode.getString(DATA).split(",")));
 					String[] strarr = OANode.getString(DATA).split(",");
 					int[] intArray = new int[strarr.length];
-					for(int j = 0; j < strarr.length; j++) {
+					for(int j = 0; j < strarr.length - 1; j++) {
 					    intArray[j] = Integer.parseInt(strarr[j]);
+				        mCurrentSeries[j].add(OANode.getDouble(TIME_TAG), (double)intArray[j]);
+				        
+				        if(i == 0) {
+				        	mRenderer.addXTextLabel(OANode.getDouble(TIME_TAG), df.format(new Date((long) (OANode.getDouble(TIME_TAG)*1000L))));
+				        }
+				        else if((i % (OANodeArray.length()/3)) == 0) {
+				        	mRenderer.addXTextLabel(OANode.getDouble(TIME_TAG), df.format(new Date((long) (OANode.getDouble(TIME_TAG)*1000L))));
+				        }
 					}
-					
-			        mCurrentSeries.add(OANode.getDouble(TIME_TAG), (double)intArray[0]);
-			        mRenderer.addXTextLabel(OANode.getDouble(TIME_TAG), df.format(new Date((long) (OANode.getDouble(TIME_TAG)*1000L))));
-			        
 
-			        Log.d("Date", OANode.getString(TIME_TAG));
+			        Log.d("DataLen", String.valueOf(strarr.length));
 			        Log.d("Date", df.format(new Date((long) (OANode.getDouble(TIME_TAG)*1000L))));
 				}
 			} catch (JSONException e) {
