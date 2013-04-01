@@ -21,16 +21,25 @@ public class OAEntryAdapter extends ArrayAdapter<OAItem> implements OAMobileTags
 		this.items = items;
 	}
 
-
 	@Override
 	public View getView(int position, View view, ViewGroup parent) {
 		View v = null;
 		
 		final OAItem i = items.get(position);
 		if (i != null) {
-			v = i.onCreateItemView(this.context);
+			if(i.getEnable()) {
+				v = i.onCreateItemView(this.context);
+			}
 		}
+		
 		return v;
 	}
-
+	
+	public OAItem getItem(int idx) {
+		return((OAItem)items.get(idx));
+	}
+	
+	public OAMobileTags.ITEM_TYPE getItemType(int idx) {
+		return(((OAItem)items.get(idx)).getItemType());
+	}
 }

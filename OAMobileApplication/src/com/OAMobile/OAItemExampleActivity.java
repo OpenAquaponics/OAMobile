@@ -117,7 +117,7 @@ public class OAItemExampleActivity extends ListActivity implements OAMobileTags 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
     	
-    	if(items.get(position).getItemType() != ITEM_TYPE.SEPERATOR_LIST){
+    	if(items.get(position).getItemType() != ITEM_TYPE.SEPARATOR_LIST){
     		OANodeItem item = (OANodeItem)items.get(position);
     		Toast.makeText(this, "You clicked something", Toast.LENGTH_SHORT).show();
     	}

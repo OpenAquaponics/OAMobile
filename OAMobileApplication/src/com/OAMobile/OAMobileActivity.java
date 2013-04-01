@@ -5,12 +5,14 @@ import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
 public class OAMobileActivity extends Activity {
+    public static final String PREFS_NAME = "OAMobilePrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,14 @@ public class OAMobileActivity extends Activity {
 //            tv.setText(textArray[i]);
 //            layout.addView(tv);
 //        }
+        
+        // Restore preferences
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        String sUsername = settings.getString("sUsername", "");
+        if(sUsername.isEmpty()) {
+        	// Pop up the login screen
+        }
+
         
     	final ActionBar actionBar = getActionBar();
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -52,6 +62,18 @@ public class OAMobileActivity extends Activity {
 	    }
 
     }
+    
+    @Override
+    protected void onStop(){
+    	super.onStop();
+
+    	// Save all of the user preferences
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		//editor.putBoolean("sUsername", sUsername);
+		editor.commit();
+    }
+
     
     @Override
     protected void onSaveInstanceState(Bundle outState) {

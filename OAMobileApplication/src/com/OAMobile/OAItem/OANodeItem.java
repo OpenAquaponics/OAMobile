@@ -14,7 +14,8 @@ import com.OAMobile.R;
 
 public class OANodeItem implements OAItem, OAMobileTags {
 
-	HashMap<String, String> map;
+	private boolean bEnable = true;
+	private HashMap<String, String> map;
 
 	@SuppressWarnings("unchecked")
 	public OANodeItem(HashMap<String, String> map) {
@@ -25,6 +26,9 @@ public class OANodeItem implements OAItem, OAMobileTags {
 	public ITEM_TYPE getItemType() {
 		return ITEM_TYPE.OANODE_LIST;
 	}
+	
+	public boolean setEnable(boolean value) { return(bEnable = value); }
+	public boolean getEnable() { return bEnable; }
 	
 	public View onCreateItemView(Context context) {
 		try {

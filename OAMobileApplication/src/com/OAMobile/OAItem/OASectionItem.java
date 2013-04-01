@@ -1,15 +1,25 @@
 package com.OAMobile.OAItem;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.OAMobile.OAMobileTags;
+import com.OAMobile.OANodeItemChartActivity;
 import com.OAMobile.R;
 
 public class OASectionItem implements OAItem, OAMobileTags {
 
+	private boolean bEnable = true;
 	private final String title;
 	
 	public OASectionItem(String title) {
@@ -21,17 +31,20 @@ public class OASectionItem implements OAItem, OAMobileTags {
 	}
 	
 	public ITEM_TYPE getItemType() {
-		return ITEM_TYPE.SEPERATOR_LIST;
+		return ITEM_TYPE.SEPARATOR_LIST;
 	}
 	
-	public View onCreateItemView(Context context) {
+	public boolean setEnable(boolean value) { return(bEnable = value); }
+	public boolean getEnable() { return bEnable; }
+	
+	public View onCreateItemView(final Context context) {
 		try {
 			LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View v = vi.inflate(R.layout.oasection_list, null);
 	
-			v.setOnClickListener(null);
-			v.setOnLongClickListener(null);
-			v.setLongClickable(false);
+//			v.setOnClickListener(null);
+//			v.setOnLongClickListener(null);
+//			v.setLongClickable(false);
 			
 			final TextView sectionView = (TextView) v.findViewById(R.id.sSectionName);
 			sectionView.setText(this.title);

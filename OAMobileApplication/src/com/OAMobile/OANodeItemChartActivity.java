@@ -115,8 +115,8 @@ public class OANodeItemChartActivity extends Activity implements OAMobileTags {
 				        }
 					}
 
-			        Log.d("DataLen", String.valueOf(strarr.length));
-			        Log.d("Date", df.format(new Date((long) (OANode.getDouble(TIME_TAG)*1000L))));
+			        //Log.d("DataLen", String.valueOf(strarr.length));
+			        //Log.d("Date", df.format(new Date((long) (OANode.getDouble(TIME_TAG)*1000L))));
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
