@@ -24,22 +24,43 @@ public class OAEntryAdapter extends ArrayAdapter<OAItem> implements OAMobileTags
 	@Override
 	public View getView(int position, View view, ViewGroup parent) {
 		View v = null;
-		
+
 		final OAItem i = items.get(position);
 		if (i != null) {
-			if(i.getEnable()) {
-				v = i.onCreateItemView(this.context);
-			}
+			v = i.onCreateItemView(this.context);
 		}
 		
 		return v;
 	}
 	
+	
 	public OAItem getItem(int idx) {
 		return((OAItem)items.get(idx));
 	}
 	
+
 	public OAMobileTags.ITEM_TYPE getItemType(int idx) {
 		return(((OAItem)items.get(idx)).getItemType());
 	}
 }
+
+
+//private ArrayList<String> mData = new ArrayList<String>();
+//private ArrayAdapter<String> mAdapter;
+//
+//@Override
+//protected void onCreate(Bundle savedInstanceState) {
+//    // ...
+//    // Code that adds the strings
+//    // Create the list adapter
+//    mAdapter = new ArrayAdapter<String>(myActivity.this, android.R.layout.simple_list_item_1, mData);
+//}
+//
+//private void removeItem(int index) {
+//    mData.removeAt(index);
+//    myActivity.this.runOnUiThread(new Runnable() {
+//        public void run() {
+//            mAdapter.notifyDataSetChanged();
+//        }
+//    }
+//}

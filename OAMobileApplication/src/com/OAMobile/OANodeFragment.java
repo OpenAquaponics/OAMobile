@@ -19,6 +19,7 @@ import android.app.ListFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,12 +44,14 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 
 
 	//private ArrayList<OAItem> items = new ArrayList<OAItem>();
+	private ArrayList<OAItem> itemsAll = null;
 	private ArrayList<OAItem> items = null;
 	
 	// contacts JSONArray
 	JSONArray OANodeArray = null;
 	JSONObject OANode = null;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -134,6 +137,7 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 					}
 					items.add(new OANodeItem(map));
 					items.add(new OANodeItem(map));
+					itemsAll = new ArrayList<OAItem>(items);
 				}
 				
 				// Build the View UI
@@ -163,8 +167,25 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 						break;
 					case SEPARATOR_LIST:
 						//((OAEntryAdapter)parent.getAdapter()).getItem(position).setEnable(false);
-						Toast toast = Toast.makeText(getActivity(), "Compressing the list", Toast.LENGTH_SHORT);
-						toast.show();
+						//items.remove(3);
+						if(itemsAll.size() == items.size()) {
+							for(int i = position + 1; i < items.size() && (((OAEntryAdapter)parent.getAdapter()).getItemType(i) != OAMobileTags.ITEM_TYPE.SEPARATOR_LIST); ) {
+								items.remove(i);
+							}
+	
+							Toast toast = Toast.makeText(getActivity(), "Compressing the list", Toast.LENGTH_SHORT);
+							toast.show();
+						}
+						else {
+							//items.clear();
+							//items = (ArrayList<OAItem>) itemsAll.clone();
+							items = new ArrayList<OAItem>(itemsAll);
+					        OAEntryAdapter adapter = new OAEntryAdapter(getActivity(), items);
+					        setListAdapter(adapter);
+					        
+							Toast toast = Toast.makeText(getActivity(), "Expanding the list", Toast.LENGTH_SHORT);
+							toast.show();
+						}
 						((OAEntryAdapter)parent.getAdapter()).notifyDataSetChanged();
 						break;
 				}
