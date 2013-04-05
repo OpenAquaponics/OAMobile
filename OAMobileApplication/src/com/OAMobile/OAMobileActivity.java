@@ -7,16 +7,20 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
 public class OAMobileActivity extends Activity {
-    public static final String PREFS_NAME = "OAMobilePrefsFile";
+	
+	private OAMobileData gData = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        gData = (OAMobileData) getApplication();
         
 //        String[] textArray={"one","two","asdasasdf asdf dsdaa"};
 //        int length=textArray.length;
@@ -29,13 +33,7 @@ public class OAMobileActivity extends Activity {
 //            tv.setText(textArray[i]);
 //            layout.addView(tv);
 //        }
-        
-        // Restore preferences
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        String sUsername = settings.getString("sUsername", "");
-        if(sUsername.isEmpty()) {
-        	// Pop up the login screen
-        }
+
 
         
     	final ActionBar actionBar = getActionBar();
@@ -60,18 +58,26 @@ public class OAMobileActivity extends Activity {
 	        int savedIndex = savedInstanceState.getInt("SAVED_INDEX");
 	        getActionBar().setSelectedNavigationItem(savedIndex);
 	    }
+	    
+	    
+	    ViewPager mViewPager = new ViewPager(this);
+
+	    mViewPager.setOnPageChangeListener(
+	            new ViewPager.SimpleOnPageChangeListener() {
+	                @Override
+	                public void onPageSelected(int position) {
+	                    // When swiping between pages, select the
+	                    // corresponding tab.
+	                    getActionBar().setSelectedNavigationItem(position);
+	                }
+	            });
 
     }
     
     @Override
     protected void onStop(){
     	super.onStop();
-
-    	// Save all of the user preferences
-		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		SharedPreferences.Editor editor = settings.edit();
-		//editor.putBoolean("sUsername", sUsername);
-		editor.commit();
+    	if(gData != null) gData.saveSettings();
     }
 
     
@@ -122,6 +128,8 @@ public class OAMobileActivity extends Activity {
 		}
     }
     
+    
+
 }
 
 

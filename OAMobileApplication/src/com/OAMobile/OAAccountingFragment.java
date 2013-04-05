@@ -33,7 +33,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 
-public class OANodeFragment extends ListFragment implements OAMobileTags {
+public class OAAccountingFragment extends ListFragment implements OAMobileTags {
 
 	// URL to OAServer
 	private static String url = "http://192.168.1.24/index.php/v1/nestinator/OANodes/ER123ER/data";
@@ -63,7 +63,7 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 		JSONParser jParser = new JSONParser();
 		JSONObject json = null;
 		try {
-			json = new JSONObject(json_nodes);
+			json = new JSONObject(json_accounting);
 		} catch (JSONException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -80,8 +80,8 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 				//   should query the database instead of reading the raw JSON data
 				//   This let the View UI be dynamically filter based on SystemID, GroupId, etc
 				
-				// Extract the OANode JSON object array
-				OANodeArray = json.getJSONArray(OANODES);
+				// Extract the OAACCOUNTING JSON object array
+				OANodeArray = json.getJSONArray(OAACCOUNTING);
 				
 				// TODO: Should error check the OANodeArray before using it
 		        items.add(new OASectionItem("OASystem: " + OANodeArray.getJSONObject(0).getString(SYSTEM_ID)));
@@ -95,8 +95,8 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 					// Create new HashMap, load all of the OANode JSON object information, and add the new item
 					// TODO: Consider making this a class function
 					map.clear();
-					for(int j = 0; j < JSON_OANodeInfo.length; j++) {
-						map.put(JSON_OANodeInfo[j], OANode.getString(JSON_OANodeInfo[j]));
+					for(int j = 0; j < JSON_OAAccountingData.length; j++) {
+						map.put(JSON_OAAccountingData[j], OANode.getString(JSON_OAAccountingData[j]));
 					}
 					items.add(new OANodeItem(map));
 				}
@@ -114,8 +114,8 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 					// Create new HashMap, load all of the OANode JSON object information, and add the new item
 					// TODO: Consider making this a class function
 					map.clear();
-					for(int j = 0; j < JSON_OANodeInfo.length; j++) {
-						map.put(JSON_OANodeInfo[j], OANode.getString(JSON_OANodeInfo[j]));
+					for(int j = 0; j < JSON_OAAccountingData.length; j++) {
+						map.put(JSON_OAAccountingData[j], OANode.getString(JSON_OAAccountingData[j]));
 					}
 					items.add(new OANodeItem(map));
 				}
@@ -132,8 +132,8 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 					// Create new HashMap, load all of the OANode JSON object information, and add the new item
 					// TODO: Consider making this a class function
 					map.clear();
-					for(int j = 0; j < JSON_OANodeInfo.length; j++) {
-						map.put(JSON_OANodeInfo[j], OANode.getString(JSON_OANodeInfo[j]));
+					for(int j = 0; j < JSON_OAAccountingData.length; j++) {
+						map.put(JSON_OAAccountingData[j], OANode.getString(JSON_OAAccountingData[j]));
 					}
 					items.add(new OANodeItem(map));
 					items.add(new OANodeItem(map));
@@ -178,7 +178,7 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 						}
 						else {
 							//items.clear();
-							//items = (ArrayList<OAItem>) itemsAll.clone();
+							//items = (ArrayList<OAItem>) itemsAll.clone(); 
 							items = new ArrayList<OAItem>(itemsAll);
 					        OAEntryAdapter adapter = new OAEntryAdapter(getActivity(), items);
 					        setListAdapter(adapter);

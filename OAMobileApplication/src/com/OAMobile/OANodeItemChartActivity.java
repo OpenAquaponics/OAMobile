@@ -75,7 +75,7 @@ public class OANodeItemChartActivity extends Activity implements OAMobileTags {
 	        mRenderer.setYAxisAlign(Align.LEFT, 0);
 	        mRenderer.setChartTitle("Raw data plots");
 	        mRenderer.setChartTitleTextSize(30);
-	        //715, 730
+	        //715, 730 
 
 	        mRenderer.setXLabelsAngle((float) 45.0);
 	        mRenderer.setMargins(new int[] {50, 100, 150, 50});

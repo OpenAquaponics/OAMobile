@@ -5,6 +5,7 @@ public interface OAMobileTags {
 	// JSON node keys
 	public static final String OANODES = "OANodes";
 	public static final String OADATA = "OAData";
+	public static final String OAACCOUNTING = "OAAccounting";
 
 	// JSON element keys
 	public static final String USERNAME = "sUsername";
@@ -20,11 +21,17 @@ public interface OAMobileTags {
 	public static final String INDEX = "mIdx";
 	public static final String TIME_TAG = "mTimeTag";
 	public static final String DATA = "sData";
+	public static final String COUNT = "mCnt";
+	public static final String DATE = "dDate";
+	public static final String AMOUNT = "fAmount";
 
 	// JSON object definition
 	public static final String[] JSON_OANodeInfo = { USERNAME, SYSTEM_ID, NODE_ID,
 		CHANNEL_NAMES, CHANNEL_UNITS, POLLING_PERIOD, DESCRIPTION, PUBLIC, ENABLED };
 	public static final String[] JSON_OANodeData = { INDEX, TIME_TAG, DATA };
+
+	public static final String[] JSON_OAAccountingData = { INDEX, COUNT, USERNAME, GROUP_ID,
+		SYSTEM_ID, NODE_ID, DATE, AMOUNT, DESCRIPTION };
 
 	
 	// ListView item type
