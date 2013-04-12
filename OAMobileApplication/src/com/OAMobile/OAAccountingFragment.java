@@ -52,8 +52,6 @@ public class OAAccountingFragment extends ListFragment implements OAMobileTags {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		gData = (OAMobileData) getActivity().getApplication();
-		if(gData == null)
-			Log.d("gData", "It's NULL");
 		
 		// Hashmap for ListView
 		HashMap<String, String> map = new HashMap<String, String>();
