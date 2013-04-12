@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.OAMobile.OAItem.OAAccountingItem;
 import com.OAMobile.OAItem.OAEntryAdapter;
 import com.OAMobile.OAItem.OAItem;
 import com.OAMobile.OAItem.OANodeItem;
@@ -84,7 +85,7 @@ public class OAAccountingFragment extends ListFragment implements OAMobileTags {
 				OANodeArray = json.getJSONArray(OAACCOUNTING);
 				
 				// TODO: Should error check the OANodeArray before using it
-		        items.add(new OASectionItem("OASystem: " + OANodeArray.getJSONObject(0).getString(SYSTEM_ID)));
+		        items.add(new OASectionItem("OASystem: TREATED" + OANodeArray.getJSONObject(0).getString(SYSTEM_ID)));
 		        
 				// Loop through all of the ONNode JSON objects
 				for(int i = 0; i < OANodeArray.length(); i++){
@@ -98,7 +99,7 @@ public class OAAccountingFragment extends ListFragment implements OAMobileTags {
 					for(int j = 0; j < JSON_OAAccountingData.length; j++) {
 						map.put(JSON_OAAccountingData[j], OANode.getString(JSON_OAAccountingData[j]));
 					}
-					items.add(new OANodeItem(map));
+					items.add(new OAAccountingItem(map));
 				}
 				
 				
@@ -117,7 +118,7 @@ public class OAAccountingFragment extends ListFragment implements OAMobileTags {
 					for(int j = 0; j < JSON_OAAccountingData.length; j++) {
 						map.put(JSON_OAAccountingData[j], OANode.getString(JSON_OAAccountingData[j]));
 					}
-					items.add(new OANodeItem(map));
+					items.add(new OAAccountingItem(map));
 				}
 				
 				// TODO: Should error check the OANodeArray before using it
@@ -135,8 +136,9 @@ public class OAAccountingFragment extends ListFragment implements OAMobileTags {
 					for(int j = 0; j < JSON_OAAccountingData.length; j++) {
 						map.put(JSON_OAAccountingData[j], OANode.getString(JSON_OAAccountingData[j]));
 					}
-					items.add(new OANodeItem(map));
-					items.add(new OANodeItem(map));
+					
+					items.add(new OAAccountingItem(map));
+					items.add(new OAAccountingItem(map));
 					itemsAll = new ArrayList<OAItem>(items);
 				}
 				

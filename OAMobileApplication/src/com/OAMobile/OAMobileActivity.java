@@ -51,7 +51,7 @@ public class OAMobileActivity extends Activity {
 	    
 	    Tab tabC = actionBar.newTab();
 	    tabC.setText("Accounting");
-	    tabC.setTabListener(new TabListener<OASystemFragment>(this, "Accounting", OASystemFragment.class));
+	    tabC.setTabListener(new TabListener<OAAccountingFragment>(this, "Accounting", OAAccountingFragment.class));
 	    actionBar.addTab(tabC);
 	         
 	    if(savedInstanceState != null) {

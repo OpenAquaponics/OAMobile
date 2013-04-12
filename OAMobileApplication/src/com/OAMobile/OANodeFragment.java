@@ -135,6 +135,7 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 					for(int j = 0; j < JSON_OANodeInfo.length; j++) {
 						map.put(JSON_OANodeInfo[j], OANode.getString(JSON_OANodeInfo[j]));
 					}
+					
 					items.add(new OANodeItem(map));
 					items.add(new OANodeItem(map));
 					itemsAll = new ArrayList<OAItem>(items);
