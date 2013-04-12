@@ -21,8 +21,7 @@ public class OAMobileActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gData = (OAMobileData) getApplication();
-        
-        gData.loadSettings();
+
         
 //        String[] textArray={"one","two","asdasasdf asdf dsdaa"};
 //        int length=textArray.length;

@@ -63,7 +63,7 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 				items = new ArrayList<OAItem>();
 				
 				// Extract the OANode JSON object array
-				OANodeArray = gData.getOANode().getJSONArray(OANODES);
+				OANodeArray = gData.getOANodes().getJSONArray(OANODES);
 				
 				// TODO: Should error check the OANodeArray before using it
 		        items.add(new OASectionItem("OASystem: " + OANodeArray.getJSONObject(0).getString(SYSTEM_ID)));
