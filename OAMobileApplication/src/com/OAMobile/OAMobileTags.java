@@ -1,5 +1,8 @@
 package com.OAMobile;
 
+import java.util.Collections;
+import java.util.HashMap;
+
 
 public interface OAMobileTags {
 	// JSON node keys
@@ -38,5 +41,20 @@ public interface OAMobileTags {
 	public enum ITEM_TYPE {
 		 SEPARATOR_LIST, OANODE_LIST, OASYSTEM_LIST, OACCOUNTING_LIST, OATASK_LIST;
 	}
+	
+	
+	/* TODO: Think about how to do this mapping dynamically */
+//	// Context menu filter options
+//	public static final HashMap<String, String> hmFilterMenu = 
+//		(HashMap<String, String>) Collections.unmodifiableMap(
+//		new HashMap<String, String>() {
+//			private static final long serialVersionUID = 1L;
+//
+//			{
+//				put(SYSTEM_ID, "OASystem ID");
+//				put(NODE_ID, "OANode ID");
+//			}
+//		});
+
 	
 }

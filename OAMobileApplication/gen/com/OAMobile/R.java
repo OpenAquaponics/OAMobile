@@ -180,12 +180,19 @@ public final class R {
         public static final int ic_menu_save=0x7f020006;
     }
     public static final class id {
+        public static final int about=0x7f080010;
         public static final int chart=0x7f080006;
+        public static final int feeds=0x7f08000e;
+        public static final int friends=0x7f08000f;
         public static final int item_refresh=0x7f08000c;
         public static final int item_save=0x7f08000d;
         public static final int list_item_entry_drawable=0x7f080000;
         public static final int list_item_entry_summary=0x7f080002;
         public static final int list_item_entry_title=0x7f080001;
+        public static final int menuDeleteOANode=0x7f080013;
+        public static final int menuEditOANode=0x7f080012;
+        public static final int menuFilterOANode=0x7f080014;
+        public static final int menuNewOANode=0x7f080011;
         public static final int oaSystemFragment=0x7f080003;
         public static final int pb_loading_app=0x7f08000b;
         public static final int sChannelNames=0x7f08000a;
@@ -207,6 +214,8 @@ public final class R {
     }
     public static final class menu {
         public static final int menu_activity=0x7f070000;
+        public static final int oamobile_menu=0x7f070001;
+        public static final int oanode_menu=0x7f070002;
     }
     public static final class string {
         public static final int app_name=0x7f050001;

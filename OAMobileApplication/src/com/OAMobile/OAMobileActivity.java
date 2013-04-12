@@ -5,11 +5,15 @@ import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 
 
 public class OAMobileActivity extends Activity {
@@ -21,6 +25,7 @@ public class OAMobileActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gData = (OAMobileData) getApplication();
+
 
         
 //        String[] textArray={"one","two","asdasasdf asdf dsdaa"};
@@ -34,7 +39,6 @@ public class OAMobileActivity extends Activity {
 //            tv.setText(textArray[i]);
 //            layout.addView(tv);
 //        }
-
 
         
     	final ActionBar actionBar = getActionBar();
@@ -89,7 +93,28 @@ public class OAMobileActivity extends Activity {
     	outState.putInt("SAVED_INDEX", getActionBar().getSelectedNavigationIndex());
     }
     
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.oamobile_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
     
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId())
+        {
+        case R.id.feeds:
+            break;
+        case R.id.friends:
+            break;
+        case R.id.about:
+            break;
+        }
+        return true;
+    }
+        
+        
     public static class TabListener<T extends Fragment> implements ActionBar.TabListener {
 		private final Activity myActivity;
 		private final String myTag;

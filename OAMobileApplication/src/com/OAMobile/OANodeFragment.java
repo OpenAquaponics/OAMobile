@@ -22,9 +22,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListAdapter;
@@ -57,6 +61,7 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 		super.onActivityCreated(savedInstanceState);
     	gData = (OAMobileData) getActivity().getApplication();
     	
+   	
 		// Hashmap for ListView
 		HashMap<String, String> map = new HashMap<String, String>();
 		
@@ -151,34 +156,100 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 			}
 		});
 		
-		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
-			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-		        AlertDialog.Builder adb=new AlertDialog.Builder(getActivity());
-		        adb.setTitle("Modify OANode");
-		        adb.setMessage("Would you like modify the node settings?");
-		        adb.setNegativeButton("Cancel", new AlertDialog.OnClickListener() {
-		            public void onClick(DialogInterface dialog, int which) {
-		            	Toast toast = Toast.makeText(getActivity(), "OANode not modified", Toast.LENGTH_SHORT);
-		            	toast.show();
-		            }});
-		        adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
-		        	// TODO : This should open up a modification menu
-		            public void onClick(DialogInterface dialog, int which) {
-		            	final OAMobileData gData = (OAMobileData) getActivity().getApplication();
-		            	if(gData != null) {
-		            		gData.clearSettings();
-		            	}
-
-		            	Toast toast = Toast.makeText(getActivity(), "Updated OANode", Toast.LENGTH_SHORT);
-		            	toast.show();
-		            }});
-		        adb.show();
-				return false;
-			}
-		});
+		
+    	registerForContextMenu(getListView());
 
 		
 	}
+    
+    @Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+	    super.onCreateContextMenu(menu, v, menuInfo);
+	    MenuInflater inflater = getActivity().getMenuInflater();
+	    inflater.inflate(R.menu.oanode_menu, menu);
+	}
+    
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        Log.d("OAMobile","I got the switch");  
 
+        switch(item.getItemId()) {
+	        case R.id.menuNewOANode:
+	        	{
+			        AlertDialog.Builder adb=new AlertDialog.Builder(getActivity());
+			        adb.setTitle("Modify OANode");
+			        adb.setMessage("Would you like modify the node settings?");
+			        adb.setNegativeButton("Cancel", new AlertDialog.OnClickListener() {
+			            public void onClick(DialogInterface dialog, int which) {
+			            	Toast toast = Toast.makeText(getActivity(), "OANode not modified", Toast.LENGTH_SHORT);
+			            	toast.show();
+			            }});
+			        adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+			        	// TODO : This should open up a modification menu
+			            public void onClick(DialogInterface dialog, int which) {
+			            	final OAMobileData gData = (OAMobileData) getActivity().getApplication();
+			            	if(gData != null) {
+			            		gData.clearSettings();
+			            	}
+		
+			            	Toast toast = Toast.makeText(getActivity(), "Updated OANode", Toast.LENGTH_SHORT);
+			            	toast.show();
+			            }});
+			        adb.show();
+	        	}
+	            return true;
+	            
+	        case R.id.menuEditOANode:
+	        case R.id.menuDeleteOANode:
+	        	{
+			        AlertDialog.Builder adb=new AlertDialog.Builder(getActivity());
+			        adb.setTitle("Modify OANode");
+			        adb.setMessage("Would you like modify the node settings?");
+			        adb.setNegativeButton("Cancel", new AlertDialog.OnClickListener() {
+			            public void onClick(DialogInterface dialog, int which) {
+			            	Toast toast = Toast.makeText(getActivity(), "OANode not modified", Toast.LENGTH_SHORT);
+			            	toast.show();
+			            }});
+			        adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+			        	// TODO : This should open up a modification menu
+			            public void onClick(DialogInterface dialog, int which) {
+			            	final OAMobileData gData = (OAMobileData) getActivity().getApplication();
+			            	if(gData != null) {
+			            		gData.clearSettings();
+			            	}
+		
+			            	Toast toast = Toast.makeText(getActivity(), "Updated OANode", Toast.LENGTH_SHORT);
+			            	toast.show();
+			            }});
+			        adb.show();
+	        	}
+	            return true;
+	            
+	        case R.id.menuFilterOANode:
+	        	{
+	        		final CharSequence[] items = {"OASystem ID", "OANode ID"};
+	        		//final CharSequence[] items = (CharSequence[]) hmFilterMenu.values().toArray();
+	        		AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+	        		adb.setTitle("Group OANodes by:");
+	        		adb.setItems(items, new DialogInterface.OnClickListener() {
+	        		    public void onClick(DialogInterface dialog, int which) {
+	        		    	switch(which) {
+	        		    		case 0:
+	        		    			break;
+	        		    		case 1:
+	        		    			break;
+	        		    		default:
+	        		    			break;
+	        		    	}
+	        		    }
+	        		});
+	        		adb.create().show();
+	        	}
+	            return true;
+	            
+	        default:
+	            return super.onContextItemSelected(item);
+        }
+    }
 }
 
