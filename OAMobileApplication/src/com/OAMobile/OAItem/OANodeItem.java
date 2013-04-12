@@ -28,7 +28,13 @@ public class OANodeItem implements OAItem, OAMobileTags {
 	}
 	
 	public boolean setEnable(boolean value) { return(bEnable = value); }
-	public boolean getEnable() { return bEnable; }
+//	public boolean getEnable() { return bEnable; }
+
+	public boolean getEnable() {
+	    if(((String) map.get(ENABLED)).compareTo("1") == 0)
+	    	return true;
+	    return false;
+	}
 	
 	public View onCreateItemView(Context context) {
 		try {

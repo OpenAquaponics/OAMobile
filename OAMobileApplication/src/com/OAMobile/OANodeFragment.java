@@ -1,6 +1,8 @@
 package com.OAMobile;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -82,8 +84,20 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 					}
 					
 					items.add(new OANodeItem(map));
+					
+					Collections.sort(items, new Comparator<OAItem>() {
+			            @Override
+			            public int compare(OAItem lhs, OAItem rhs) {
+			            	/* Return logic seems backwards, but it works! */
+			                if(lhs.getEnable())
+			                    return -1;
+			                return 1; 
+			            }
+			        });
+					
 					itemsAll = new ArrayList<OAItem>(items);
 				}
+
 				
 				// Build the View UI
 				if(getActivity() != null) {
