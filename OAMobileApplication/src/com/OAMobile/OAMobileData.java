@@ -32,8 +32,18 @@ public class OAMobileData extends Application {
         	editor.putString("sUsername", "nestinator");
         }
         
-    	editor.commit();
+        String jOANodes = settings.getString("jOANodes", "");
+        if(jOANodes.isEmpty()) {
+        	Log.d("Global", "Loading the default values");
+        	final String json_nodes = "{\"OANodes\":[{\"sUsername\":\"nestinator\",\"sSystemId\":\"IK89EQ2\",\"sNodeId\":\"ER123ER\",\"sChannelNames\":\"Water Level,Air Temp,Water Temp\",\"sChannelUnits\":\"mm,F,F\",\"mPollingPeriod\":\"10\",\"sDescription\":\"The indoor fish tank\",\"bPublic\":\"1\",\"bEnable\":\"1\"},{\"sUsername\":\"nestinator\",\"sSystemId\":\"IK89EQ2\",\"sNodeId\":\"FG5T1QR\",\"sChannelNames\":\"Water Level,Air Temp,Water Temp\",\"sChannelUnits\":\"mm,F,F\",\"mPollingPeriod\":\"10\",\"sDescription\":\"The outdoor balcony system\",\"bPublic\":\"1\",\"bEnable\":\"0\"},{\"sUsername\":\"nestinator\",\"sSystemId\":\"IK89EQ2\",\"sNodeId\":\"UY852RF\",\"sChannelNames\":\"Water Level,Air Temp,Water Temp\",\"sChannelUnits\":\"mm,F,F\",\"mPollingPeriod\":\"10\",\"sDescription\":\"The commerical system\",\"bPublic\":\"0\",\"bEnable\":\"1\"},{\"sUsername\":\"nestinator\",\"sSystemId\":\"JU7E3R1\",\"sNodeId\":\"IU45WE\",\"sChannelNames\":\"Water Level,Air Temp,Water Temp\",\"sChannelUnits\":\"mm,F,F\",\"mPollingPeriod\":\"10\",\"sDescription\":\"The indoor fish tank\",\"bPublic\":\"1\",\"bEnable\":\"1\"},{\"sUsername\":\"nestinator\",\"sSystemId\":\"IK89EQ2\",\"sNodeId\":\"LK9DF2W\",\"sChannelNames\":\"Water Level,Air Temp,Water Temp\",\"sChannelUnits\":\"mm,F,F\",\"mPollingPeriod\":\"10\",\"sDescription\":\"The outdoor balcony system\",\"bPublic\":\"1\",\"bEnable\":\"0\"},{\"sUsername\":\"nestinator\",\"sSystemId\":\"IK89EQ2\",\"sNodeId\":\"908TYR\",\"sChannelNames\":\"Water Level,Air Temp,Water Temp\",\"sChannelUnits\":\"mm,F,F\",\"mPollingPeriod\":\"10\",\"sDescription\":\"The commerical system\",\"bPublic\":\"0\",\"bEnable\":\"1\"},{\"sUsername\":\"nestinator\",\"sSystemId\":\"WE48YJU\",\"sNodeId\":\"UT6I87\",\"sChannelNames\":\"Water Level,Air Temp,Water Temp\",\"sChannelUnits\":\"mm,F,F\",\"mPollingPeriod\":\"10\",\"sDescription\":\"The indoor fish tank\",\"bPublic\":\"1\",\"bEnable\":\"1\"},{\"sUsername\":\"nestinator\",\"sSystemId\":\"WE48YJU\",\"sNodeId\":\"PL2E4T5\",\"sChannelNames\":\"Water Level,Air Temp,Water Temp\",\"sChannelUnits\":\"mm,F,F\",\"mPollingPeriod\":\"10\",\"sDescription\":\"The outdoor balcony system\",\"bPublic\":\"1\",\"bEnable\":\"0\"},{\"sUsername\":\"nestinator\",\"sSystemId\":\"WE48YJU\",\"sNodeId\":\"IDRE24R\",\"sChannelNames\":\"Water Level,Air Temp,Water Temp\",\"sChannelUnits\":\"mm,F,F\",\"mPollingPeriod\":\"10\",\"sDescription\":\"The commerical system\",\"bPublic\":\"0\",\"bEnable\":\"1\"}]}";
+        	loadOANodes(json_nodes);
+        }
+        else {
+        	Log.d("Global", "Using the previous values");
+        	loadOANodes(jOANodes);
+        }
     	
+    	editor.commit();
     }
     
     public void saveSettings() {
@@ -44,11 +54,13 @@ public class OAMobileData extends Application {
 		editor.commit();
     }
     
+    public void clearSettings() {
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+    	settings.edit().clear().commit();
+    	Log.d("Global", "Clearing settings");
+    }
     
-    public void loadOANodes() {
-		// Creating JSON Parser instance
-    	String json_nodes = "{\"OANodes\":[{\"sUsername\":\"nestinator\",\"sSystemId\":\"IK89EQ2\",\"sNodeId\":\"ER123ER\",\"sChannelNames\":\"Water Level,Air Temp,Water Temp\",\"sChannelUnits\":\"mm,F,F\",\"mPollingPeriod\":\"10\",\"sDescription\":\"The indoor fish tank\",\"bPublic\":\"1\",\"bEnable\":\"1\"},{\"sUsername\":\"nestinator\",\"sSystemId\":\"IK89EQ2\",\"sNodeId\":\"FG5T1QR\",\"sChannelNames\":\"Water Level,Air Temp,Water Temp\",\"sChannelUnits\":\"mm,F,F\",\"mPollingPeriod\":\"10\",\"sDescription\":\"The outdoor balcony system\",\"bPublic\":\"1\",\"bEnable\":\"0\"},{\"sUsername\":\"nestinator\",\"sSystemId\":\"IK89EQ2\",\"sNodeId\":\"UY852RF\",\"sChannelNames\":\"Water Level,Air Temp,Water Temp\",\"sChannelUnits\":\"mm,F,F\",\"mPollingPeriod\":\"10\",\"sDescription\":\"The commerical system\",\"bPublic\":\"0\",\"bEnable\":\"1\"}]}";
-
+    public void loadOANodes(String json_nodes) {
 		try {
 			OANode = new JSONObject(json_nodes);
 		} catch (JSONException e1) {
@@ -59,7 +71,6 @@ public class OAMobileData extends Application {
     
     public JSONObject getOANode() {
 		return OANode;
-    	
     }
 }
 

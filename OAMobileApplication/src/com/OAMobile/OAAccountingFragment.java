@@ -10,25 +10,18 @@ import org.json.JSONObject;
 import com.OAMobile.OAItem.OAAccountingItem;
 import com.OAMobile.OAItem.OAEntryAdapter;
 import com.OAMobile.OAItem.OAItem;
-import com.OAMobile.OAItem.OANodeItem;
 import com.OAMobile.OAItem.OASectionItem;
 
 import android.os.Bundle;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.app.ListFragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
@@ -52,10 +45,15 @@ public class OAAccountingFragment extends ListFragment implements OAMobileTags {
 	JSONArray OANodeArray = null;
 	JSONObject OANode = null;
 
+	private OAMobileData gData = null;
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		gData = (OAMobileData) getActivity().getApplication();
+		if(gData == null)
+			Log.d("gData", "It's NULL");
 		
 		// Hashmap for ListView
 		HashMap<String, String> map = new HashMap<String, String>();

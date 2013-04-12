@@ -22,6 +22,8 @@ public class OAMobileActivity extends Activity {
         super.onCreate(savedInstanceState);
         gData = (OAMobileData) getApplication();
         
+        gData.loadSettings();
+        
 //        String[] textArray={"one","two","asdasasdf asdf dsdaa"};
 //        int length=textArray.length;
 //        LinearLayout layout = new LinearLayout(this);

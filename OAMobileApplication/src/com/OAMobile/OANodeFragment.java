@@ -50,79 +50,28 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 	// contacts JSONArray
 	JSONArray OANodeArray = null;
 	JSONObject OANode = null;
-
+	
+	private OAMobileData gData = null;
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		
+    	gData = (OAMobileData) getActivity().getApplication();
+    	
 		// Hashmap for ListView
 		HashMap<String, String> map = new HashMap<String, String>();
-
-		// Creating JSON Parser instance
-		JSONParser jParser = new JSONParser();
-		JSONObject json = null;
-		try {
-			json = new JSONObject(json_nodes);
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		
 		try {
 			if(items == null) {
 				items = new ArrayList<OAItem>();
 				
-				// This keeps getting reloaded!!!  Might need to go in another function or clear the view and rebuild it
-				//  Currently this hackish way stops it from reloading the same data
-				
-				// TODO: The JSON items should be saved to a DB and then the UI View
-				//   should query the database instead of reading the raw JSON data
-				//   This let the View UI be dynamically filter based on SystemID, GroupId, etc
-				
 				// Extract the OANode JSON object array
-				OANodeArray = json.getJSONArray(OANODES);
+				OANodeArray = gData.getOANode().getJSONArray(OANODES);
 				
 				// TODO: Should error check the OANodeArray before using it
 		        items.add(new OASectionItem("OASystem: " + OANodeArray.getJSONObject(0).getString(SYSTEM_ID)));
-		        
-				// Loop through all of the ONNode JSON objects
-				for(int i = 0; i < OANodeArray.length(); i++){
-				
-					// Extract the current JSON object
-					OANode = OANodeArray.getJSONObject(i);
-					
-					// Create new HashMap, load all of the OANode JSON object information, and add the new item
-					// TODO: Consider making this a class function
-					map.clear();
-					for(int j = 0; j < JSON_OANodeInfo.length; j++) {
-						map.put(JSON_OANodeInfo[j], OANode.getString(JSON_OANodeInfo[j]));
-					}
-					items.add(new OANodeItem(map));
-				}
-				
-				
-				// TODO: Should error check the OANodeArray before using it
-		        items.add(new OASectionItem("OASystem: 4YTR4W2"));
-		        
-				// Loop through all of the ONNode JSON objects
-				for(int i = 0; i < OANodeArray.length()-1; i++){
-				
-					// Extract the current JSON object
-					OANode = OANodeArray.getJSONObject(i);
-					
-					// Create new HashMap, load all of the OANode JSON object information, and add the new item
-					// TODO: Consider making this a class function
-					map.clear();
-					for(int j = 0; j < JSON_OANodeInfo.length; j++) {
-						map.put(JSON_OANodeInfo[j], OANode.getString(JSON_OANodeInfo[j]));
-					}
-					items.add(new OANodeItem(map));
-				}
-				
-				// TODO: Should error check the OANodeArray before using it
-		        items.add(new OASectionItem("OASystem: HJ8T22S"));
-		        
+
 				// Loop through all of the ONNode JSON objects
 				for(int i = 0; i < OANodeArray.length(); i++){
 				
@@ -136,7 +85,6 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 						map.put(JSON_OANodeInfo[j], OANode.getString(JSON_OANodeInfo[j]));
 					}
 					
-					items.add(new OANodeItem(map));
 					items.add(new OANodeItem(map));
 					itemsAll = new ArrayList<OAItem>(items);
 				}
@@ -206,6 +154,11 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 		        adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
 		        	// TODO : This should open up a modification menu
 		            public void onClick(DialogInterface dialog, int which) {
+		            	final OAMobileData gData = (OAMobileData) getActivity().getApplication();
+		            	if(gData != null) {
+		            		gData.clearSettings();
+		            	}
+
 		            	Toast toast = Toast.makeText(getActivity(), "Updated OANode", Toast.LENGTH_SHORT);
 		            	toast.show();
 		            }});
