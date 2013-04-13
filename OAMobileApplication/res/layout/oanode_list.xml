@@ -6,13 +6,13 @@
     android:background="@color/White"
    	android:paddingTop="5dp"
    	android:paddingBottom="5dp" >
-     
+    
     <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:orientation="vertical"
     	android:paddingLeft="5dp">
-    	
+    
         <!-- The OANode heading  -->
    		<LinearLayout
 	        android:layout_height="wrap_content"

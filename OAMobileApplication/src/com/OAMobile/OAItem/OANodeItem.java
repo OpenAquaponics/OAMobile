@@ -15,6 +15,7 @@ import com.OAMobile.R;
 public class OANodeItem implements OAItem, OAMobileTags {
 
 	private boolean bEnable = true;
+	private boolean bPublic = true;
 	private HashMap<String, String> map;
 
 	@SuppressWarnings("unchecked")
@@ -28,12 +29,24 @@ public class OANodeItem implements OAItem, OAMobileTags {
 	}
 	
 	public boolean setEnable(boolean value) { return(bEnable = value); }
-//	public boolean getEnable() { return bEnable; }
 
 	public boolean getEnable() {
 	    if(((String) map.get(ENABLED)).compareTo("1") == 0)
 	    	return true;
 	    return false;
+	}
+	
+	public boolean setPublic(boolean value) { return(bPublic = value); }
+
+	public boolean getPublic() {
+	    if(((String) map.get(PUBLIC)).compareTo("1") == 0)
+	    	return true;
+	    return false;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public HashMap<String, String> getItem() {
+		return (HashMap<String, String>) map.clone();
 	}
 	
 	public View onCreateItemView(Context context) {

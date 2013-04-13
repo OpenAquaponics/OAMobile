@@ -1,5 +1,7 @@
 package com.OAMobile.OAItem;
 
+import java.util.HashMap;
+
 import android.content.Context;
 import android.view.View;
 
@@ -12,4 +14,10 @@ public interface OAItem extends OAMobileTags {
 	
 	public boolean setEnable(boolean value);
 	public boolean getEnable();
+	
+	public boolean setPublic(boolean value);
+	public boolean getPublic();
+	
+	public HashMap<String, String> getItem();
+
 }

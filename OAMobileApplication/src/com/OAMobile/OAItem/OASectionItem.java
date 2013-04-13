@@ -1,5 +1,7 @@
 package com.OAMobile.OAItem;
 
+import java.util.HashMap;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -20,6 +22,7 @@ import com.OAMobile.R;
 public class OASectionItem implements OAItem, OAMobileTags {
 
 	private boolean bEnable = true;
+	private boolean bPublic = true;
 	private final String title;
 	
 	public OASectionItem(String title) {
@@ -36,6 +39,13 @@ public class OASectionItem implements OAItem, OAMobileTags {
 	
 	public boolean setEnable(boolean value) { return(bEnable = value); }
 	public boolean getEnable() { return bEnable; }
+	public boolean setPublic(boolean value) { return(bPublic = value); }
+	public boolean getPublic() { return bPublic; }
+	
+	@SuppressWarnings("unchecked")
+	public HashMap<String, String> getItem() {
+		return (HashMap<String, String>) null;
+	}
 	
 	public View onCreateItemView(final Context context) {
 		try {

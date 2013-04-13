@@ -15,6 +15,7 @@ import com.OAMobile.R;
 public class OAAccountingItem implements OAItem, OAMobileTags {
 
 	private boolean bEnable = true;
+	private boolean bPublic = true;
 	private HashMap<String, String> map;
 
 	@SuppressWarnings("unchecked")
@@ -29,6 +30,13 @@ public class OAAccountingItem implements OAItem, OAMobileTags {
 	
 	public boolean setEnable(boolean value) { return(bEnable = value); }
 	public boolean getEnable() { return bEnable; }
+	public boolean setPublic(boolean value) { return(bPublic = value); }
+	public boolean getPublic() { return bPublic; }
+	
+	@SuppressWarnings("unchecked")
+	public HashMap<String, String> getItem() {
+		return (HashMap<String, String>) map.clone();
+	}
 	
 	public View onCreateItemView(Context context) {
 		try {

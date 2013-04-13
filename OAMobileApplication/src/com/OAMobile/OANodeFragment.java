@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +28,7 @@ import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
@@ -80,7 +82,7 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 					case SEPARATOR_LIST:
 						//((OAEntryAdapter)parent.getAdapter()).getItem(position).setEnable(false);
 						//items.remove(3);
-						if(itemsAll.size() == items.size()) {
+						if(itemsAll.size() == items.size() - 2) {
 							for(int i = position + 1; i < items.size() && (((OAEntryAdapter)parent.getAdapter()).getItemType(i) != OAMobileTags.ITEM_TYPE.SEPARATOR_LIST); ) {
 								items.remove(i);
 							}
@@ -89,9 +91,7 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 							toast.show();
 						}
 						else {
-							//items.clear();
-							//items = (ArrayList<OAItem>) itemsAll.clone();
-							items = new ArrayList<OAItem>(itemsAll);
+							sortList(sPrevSort);
 					        OAEntryAdapter adapter = new OAEntryAdapter(getActivity(), items);
 					        setListAdapter(adapter);
 					        
@@ -107,7 +107,7 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 		
     	
 		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
-			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+			public boolean onItemLongClick(final AdapterView<?> parent, View view, int position, long id) {
 	    		final CharSequence[] items = {"New", "Edit", "Delete", "Filter Results"};
 	    		//final CharSequence[] items = (CharSequence[]) hmFilterMenu.values().toArray();
 	    		AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
@@ -119,16 +119,17 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 	    		    		case 1: editOANode(); break;
 	    		    		case 2: deleteOANode(); break;
 	    		    		case 3: filterOANode(); break;
-	    		    		default:
-	    		    			break;
+	    		    		default: break;
 	    		    	}
+	    		    	((OAEntryAdapter)parent.getAdapter()).notifyDataSetChanged();
 	    		    }
 	    		});
 	    		adb.create().show();
 	    		return false;
 			}
 		});
-    	
+
+
     	//registerForContextMenu(getListView());
 
 		
@@ -146,8 +147,8 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 			// Hashmap for ListView
 			HashMap<String, String> map = new HashMap<String, String>();
 			
-			if(items == null) {
-				items = new ArrayList<OAItem>();
+			if(itemsAll == null) {
+				itemsAll = new ArrayList<OAItem>();
 				
 				// Extract the OANode JSON object array
 				OANodeArray = gData.getOANodes().getJSONArray(OANODES);
@@ -168,12 +169,11 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 						map.put(JSON_OANodeInfo[j], OANode.getString(JSON_OANodeInfo[j]));
 					}
 					
-					items.add(new OANodeItem(map));
+					itemsAll.add(new OANodeItem(map));
 				}
 				
 				/* Save the whole list */
-		        sort(ENABLED);
-				itemsAll = new ArrayList<OAItem>(items);
+				sortList(SYSTEM_ID);
 				
 				// Build the View UI
 				if(getActivity() != null) {
@@ -238,19 +238,17 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
     }
     
     public void filterOANode() {
-		final CharSequence[] items = {"OASystem ID", "OANode ID"};
+		final CharSequence[] items = {"OASystem ID", "OANode ID", "Public/Private", "Enabled/Disabled"};
 		//final CharSequence[] items = (CharSequence[]) hmFilterMenu.values().toArray();
 		AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
 		adb.setTitle("Group OANodes by:");
 		adb.setItems(items, new DialogInterface.OnClickListener() {
 		    public void onClick(DialogInterface dialog, int which) {
 		    	switch(which) {
-		    		case 0:
-		    			break;
-		    		case 1:
-		    			break;
-		    		default:
-		    			break;
+    				case 1: sortList(NODE_ID); break;
+	    			case 2: sortList(PUBLIC); break;
+		    		case 3: sortList(ENABLED); break;
+		    		default: sortList(SYSTEM_ID); break;
 		    	}
 		    }
 		});
@@ -260,15 +258,17 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
     
     
 	
-	public void sort(String sCmp) {
+	public void sortList(String sCmp) {
+		/* Start off with a clean list */
+		if(itemsAll != null)
+			items = new ArrayList<OAItem>(itemsAll);
+		
 		if(sCmp.compareTo(NODE_ID) == 0) {
 			Collections.sort(items, new Comparator<OAItem>() {
 		        @Override
 		        public int compare(OAItem lhs, OAItem rhs) {
 		        	/* Return logic seems backwards, but it works! */
-		            if(lhs.getEnable())
-		                return -1;
-		            return 1; 
+		        	return ((OANodeItem)lhs).getItem().get(NODE_ID).compareTo(((OANodeItem)rhs).getItem().get(NODE_ID));
 		        }
 		    });
 		}
@@ -296,18 +296,55 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 				}
 			}
 		}
-		else { /* Default is to sort by OASystemID */
+		else if(sCmp.compareTo(PUBLIC) == 0) {
 			Collections.sort(items, new Comparator<OAItem>() {
 		        @Override
 		        public int compare(OAItem lhs, OAItem rhs) {
 		        	/* Return logic seems backwards, but it works! */
-		            if(lhs.getEnable())
-		                return -1;
-		            return 1; 
+		            if(rhs.getPublic())
+		                return 1;
+		            return -1; 
 		        }
 		    });
+			
+			/* Insert a separator if there is an enabled item in the list */
+			if(items.get(0).getPublic()) {
+				items.add(0, new OASectionItem("Public"));
+			}
+			
+			/* Insert a separator if there is a disabled item in the list */
+			for(int i = 0; i < items.size(); i++) {
+				if((!items.get(i).getPublic()) && (items.get(i).getItemType() == ITEM_TYPE.OANODE_LIST)) {
+					items.add(i, new OASectionItem("Private"));
+					i = items.size();
+				}
+			}
+		}
+		else { /* Default is to sort by OASystemID */
+			//List<String> sSystemName = new ArrayList<String>();
+
+			
+			Collections.sort(items, new Comparator<OAItem>() {
+		        @Override
+		        public int compare(OAItem lhs, OAItem rhs) {
+		        	/* Return logic seems backwards, but it works! */
+		        	return ((OANodeItem)lhs).getItem().get(SYSTEM_ID).compareTo(((OANodeItem)rhs).getItem().get(SYSTEM_ID));
+		        }
+		    });
+			
+			items.add(0, new OASectionItem(((OANodeItem)items.get(0)).getItem().get(SYSTEM_ID)));
+			for(int i = 1; i < items.size()-1; i++) {
+				if(((OANodeItem)items.get(i)).getItem().get(SYSTEM_ID).compareTo(((OANodeItem)items.get(i+1)).getItem().get(SYSTEM_ID)) != 0) {
+					items.add(i+1, new OASectionItem(((OANodeItem)items.get(i+1)).getItem().get(SYSTEM_ID)));
+					i++;
+				}
+			}
+			
 		}
 		
+        OAEntryAdapter adapter = new OAEntryAdapter(getActivity(), items);
+        setListAdapter(adapter);
+        
 		sPrevSort = sCmp;
 	}
 }
