@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.OAMobile.OAMobileTags;
 
-public interface OAItem extends OAMobileTags{
+public interface OAItem extends OAMobileTags {
 		
 	public View onCreateItemView(Context context);
 	public ITEM_TYPE getItemType();

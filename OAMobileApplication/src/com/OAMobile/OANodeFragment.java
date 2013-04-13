@@ -48,6 +48,7 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 
 	private ArrayList<OAItem> itemsAll = null;
 	private ArrayList<OAItem> items = null;
+	private String sPrevSort = SYSTEM_ID;
 	
 	// contacts JSONArray
 	JSONArray OANodeArray = null;
@@ -61,61 +62,8 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 		super.onActivityCreated(savedInstanceState);
     	gData = (OAMobileData) getActivity().getApplication();
     	
-   	
-		// Hashmap for ListView
-		HashMap<String, String> map = new HashMap<String, String>();
-		
-		try {
-			if(items == null) {
-				items = new ArrayList<OAItem>();
-				
-				// Extract the OANode JSON object array
-				OANodeArray = gData.getOANodes().getJSONArray(OANODES);
-				
-				// TODO: Should error check the OANodeArray before using it
-		        items.add(new OASectionItem("OASystem: " + OANodeArray.getJSONObject(0).getString(SYSTEM_ID)));
-
-				// Loop through all of the ONNode JSON objects
-				for(int i = 0; i < OANodeArray.length(); i++){
-				
-					// Extract the current JSON object
-					OANode = OANodeArray.getJSONObject(i);
-					
-					// Create new HashMap, load all of the OANode JSON object information, and add the new item
-					// TODO: Consider making this a class function
-					map.clear();
-					for(int j = 0; j < JSON_OANodeInfo.length; j++) {
-						map.put(JSON_OANodeInfo[j], OANode.getString(JSON_OANodeInfo[j]));
-					}
-					
-					items.add(new OANodeItem(map));
-					
-					Collections.sort(items, new Comparator<OAItem>() {
-			            @Override
-			            public int compare(OAItem lhs, OAItem rhs) {
-			            	/* Return logic seems backwards, but it works! */
-			                if(lhs.getEnable())
-			                    return -1;
-			                return 1; 
-			            }
-			        });
-					
-					itemsAll = new ArrayList<OAItem>(items);
-				}
-
-				
-				// Build the View UI
-				if(getActivity() != null) {
-			        OAEntryAdapter adapter = new OAEntryAdapter(getActivity(), items);
-			        setListAdapter(adapter);
-				}
-			}
-		}
-		catch (JSONException e) {
-			e.printStackTrace();
-		}
-        
-        
+		loadOANodes();
+                
 		// Create the single ListView upon item click/selection
 		ListView lv = getListView();
 		lv.setOnItemClickListener(new OnItemClickListener() {
@@ -157,99 +105,210 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 		});
 		
 		
-    	registerForContextMenu(getListView());
+    	
+		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+	    		final CharSequence[] items = {"New", "Edit", "Delete", "Filter Results"};
+	    		//final CharSequence[] items = (CharSequence[]) hmFilterMenu.values().toArray();
+	    		AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+	    		adb.setTitle("OANode Options");
+	    		adb.setItems(items, new DialogInterface.OnClickListener() {
+	    		    public void onClick(DialogInterface dialog, int which) {
+	    		    	switch(which) {
+	    		    		case 0:	createOANode(); break;
+	    		    		case 1: editOANode(); break;
+	    		    		case 2: deleteOANode(); break;
+	    		    		case 3: filterOANode(); break;
+	    		    		default:
+	    		    			break;
+	    		    	}
+	    		    }
+	    		});
+	    		adb.create().show();
+	    		return false;
+			}
+		});
+    	
+    	//registerForContextMenu(getListView());
 
 		
 	}
     
-    @Override
-	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-	    super.onCreateContextMenu(menu, v, menuInfo);
-	    MenuInflater inflater = getActivity().getMenuInflater();
-	    inflater.inflate(R.menu.oanode_menu, menu);
-	}
+//    @Override
+//	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+//	    super.onCreateContextMenu(menu, v, menuInfo);
+//	    MenuInflater inflater = getActivity().getMenuInflater();
+//	    inflater.inflate(R.menu.oanode_menu, menu);
+//	}
     
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        Log.d("OAMobile","I got the switch");  
-
-        switch(item.getItemId()) {
-	        case R.id.menuNewOANode:
-	        	{
-			        AlertDialog.Builder adb=new AlertDialog.Builder(getActivity());
-			        adb.setTitle("Modify OANode");
-			        adb.setMessage("Would you like modify the node settings?");
-			        adb.setNegativeButton("Cancel", new AlertDialog.OnClickListener() {
-			            public void onClick(DialogInterface dialog, int which) {
-			            	Toast toast = Toast.makeText(getActivity(), "OANode not modified", Toast.LENGTH_SHORT);
-			            	toast.show();
-			            }});
-			        adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
-			        	// TODO : This should open up a modification menu
-			            public void onClick(DialogInterface dialog, int which) {
-			            	final OAMobileData gData = (OAMobileData) getActivity().getApplication();
-			            	if(gData != null) {
-			            		gData.clearSettings();
-			            	}
-		
-			            	Toast toast = Toast.makeText(getActivity(), "Updated OANode", Toast.LENGTH_SHORT);
-			            	toast.show();
-			            }});
-			        adb.show();
-	        	}
-	            return true;
-	            
-	        case R.id.menuEditOANode:
-	        case R.id.menuDeleteOANode:
-	        	{
-			        AlertDialog.Builder adb=new AlertDialog.Builder(getActivity());
-			        adb.setTitle("Modify OANode");
-			        adb.setMessage("Would you like modify the node settings?");
-			        adb.setNegativeButton("Cancel", new AlertDialog.OnClickListener() {
-			            public void onClick(DialogInterface dialog, int which) {
-			            	Toast toast = Toast.makeText(getActivity(), "OANode not modified", Toast.LENGTH_SHORT);
-			            	toast.show();
-			            }});
-			        adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
-			        	// TODO : This should open up a modification menu
-			            public void onClick(DialogInterface dialog, int which) {
-			            	final OAMobileData gData = (OAMobileData) getActivity().getApplication();
-			            	if(gData != null) {
-			            		gData.clearSettings();
-			            	}
-		
-			            	Toast toast = Toast.makeText(getActivity(), "Updated OANode", Toast.LENGTH_SHORT);
-			            	toast.show();
-			            }});
-			        adb.show();
-	        	}
-	            return true;
-	            
-	        case R.id.menuFilterOANode:
-	        	{
-	        		final CharSequence[] items = {"OASystem ID", "OANode ID"};
-	        		//final CharSequence[] items = (CharSequence[]) hmFilterMenu.values().toArray();
-	        		AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
-	        		adb.setTitle("Group OANodes by:");
-	        		adb.setItems(items, new DialogInterface.OnClickListener() {
-	        		    public void onClick(DialogInterface dialog, int which) {
-	        		    	switch(which) {
-	        		    		case 0:
-	        		    			break;
-	        		    		case 1:
-	        		    			break;
-	        		    		default:
-	        		    			break;
-	        		    	}
-	        		    }
-	        		});
-	        		adb.create().show();
-	        	}
-	            return true;
-	            
-	        default:
-	            return super.onContextItemSelected(item);
-        }
+    public void loadOANodes() {
+		try {
+			// Hashmap for ListView
+			HashMap<String, String> map = new HashMap<String, String>();
+			
+			if(items == null) {
+				items = new ArrayList<OAItem>();
+				
+				// Extract the OANode JSON object array
+				OANodeArray = gData.getOANodes().getJSONArray(OANODES);
+				
+				// TODO: Should error check the OANodeArray before using it
+		        //items.add(new OASectionItem("OASystem: " + OANodeArray.getJSONObject(0).getString(SYSTEM_ID)));
+	
+				// Loop through all of the ONNode JSON objects
+				for(int i = 0; i < OANodeArray.length(); i++){
+				
+					// Extract the current JSON object
+					OANode = OANodeArray.getJSONObject(i);
+					
+					// Create new HashMap, load all of the OANode JSON object information, and add the new item
+					// TODO: Consider making this a class function
+					map.clear();
+					for(int j = 0; j < JSON_OANodeInfo.length; j++) {
+						map.put(JSON_OANodeInfo[j], OANode.getString(JSON_OANodeInfo[j]));
+					}
+					
+					items.add(new OANodeItem(map));
+				}
+				
+				/* Save the whole list */
+		        sort(ENABLED);
+				itemsAll = new ArrayList<OAItem>(items);
+				
+				// Build the View UI
+				if(getActivity() != null) {
+			        OAEntryAdapter adapter = new OAEntryAdapter(getActivity(), items);
+			        setListAdapter(adapter);
+				}
+			}
+		}
+		catch (JSONException e) {
+			e.printStackTrace();
+		}
     }
+    
+    public void createOANode() {
+        AlertDialog.Builder adb=new AlertDialog.Builder(getActivity());
+        adb.setTitle("Modify OANode");
+        adb.setMessage("Would you like modify the node settings?");
+        adb.setNegativeButton("Cancel", new AlertDialog.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            	Toast toast = Toast.makeText(getActivity(), "OANode not modified", Toast.LENGTH_SHORT);
+            	toast.show();
+            }});
+        adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+        	// TODO : This should open up a modification menu
+            public void onClick(DialogInterface dialog, int which) {
+            	final OAMobileData gData = (OAMobileData) getActivity().getApplication();
+            	if(gData != null) {
+            		gData.clearSettings();
+            	}
+
+            	Toast toast = Toast.makeText(getActivity(), "Updated OANode", Toast.LENGTH_SHORT);
+            	toast.show();
+            }});
+        adb.show();
+    }
+    
+    public void editOANode() {
+        AlertDialog.Builder adb=new AlertDialog.Builder(getActivity());
+        adb.setTitle("Modify OANode");
+        adb.setMessage("Would you like modify the node settings?");
+        adb.setNegativeButton("Cancel", new AlertDialog.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            	Toast toast = Toast.makeText(getActivity(), "OANode not modified", Toast.LENGTH_SHORT);
+            	toast.show();
+            }});
+        adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+        	// TODO : This should open up a modification menu
+            public void onClick(DialogInterface dialog, int which) {
+            	final OAMobileData gData = (OAMobileData) getActivity().getApplication();
+            	if(gData != null) {
+            		gData.clearSettings();
+            	}
+
+            	Toast toast = Toast.makeText(getActivity(), "Updated OANode", Toast.LENGTH_SHORT);
+            	toast.show();
+            }});
+        adb.show();
+    }
+    
+    public void deleteOANode() {
+    	
+    }
+    
+    public void filterOANode() {
+		final CharSequence[] items = {"OASystem ID", "OANode ID"};
+		//final CharSequence[] items = (CharSequence[]) hmFilterMenu.values().toArray();
+		AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+		adb.setTitle("Group OANodes by:");
+		adb.setItems(items, new DialogInterface.OnClickListener() {
+		    public void onClick(DialogInterface dialog, int which) {
+		    	switch(which) {
+		    		case 0:
+		    			break;
+		    		case 1:
+		    			break;
+		    		default:
+		    			break;
+		    	}
+		    }
+		});
+		adb.create().show();
+    }
+    
+    
+    
+	
+	public void sort(String sCmp) {
+		if(sCmp.compareTo(NODE_ID) == 0) {
+			Collections.sort(items, new Comparator<OAItem>() {
+		        @Override
+		        public int compare(OAItem lhs, OAItem rhs) {
+		        	/* Return logic seems backwards, but it works! */
+		            if(lhs.getEnable())
+		                return -1;
+		            return 1; 
+		        }
+		    });
+		}
+		else if(sCmp.compareTo(ENABLED) == 0) {
+			Collections.sort(items, new Comparator<OAItem>() {
+		        @Override
+		        public int compare(OAItem lhs, OAItem rhs) {
+		        	/* Return logic seems backwards, but it works! */
+		            if(rhs.getEnable())
+		                return 1;
+		            return -1; 
+		        }
+		    });
+			
+			/* Insert a separator if there is an enabled item in the list */
+			if(items.get(0).getEnable()) {
+				items.add(0, new OASectionItem("Enabled"));
+			}
+			
+			/* Insert a separator if there is a disabled item in the list */
+			for(int i = 0; i < items.size(); i++) {
+				if((!items.get(i).getEnable()) && (items.get(i).getItemType() == ITEM_TYPE.OANODE_LIST)) {
+					items.add(i, new OASectionItem("Disabled"));
+					i = items.size();
+				}
+			}
+		}
+		else { /* Default is to sort by OASystemID */
+			Collections.sort(items, new Comparator<OAItem>() {
+		        @Override
+		        public int compare(OAItem lhs, OAItem rhs) {
+		        	/* Return logic seems backwards, but it works! */
+		            if(lhs.getEnable())
+		                return -1;
+		            return 1; 
+		        }
+		    });
+		}
+		
+		sPrevSort = sCmp;
+	}
 }
 
