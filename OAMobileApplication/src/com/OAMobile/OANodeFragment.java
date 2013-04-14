@@ -27,8 +27,10 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
@@ -65,7 +67,7 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
     	gData = (OAMobileData) getActivity().getApplication();
     	
 		loadOANodes();
-                
+		
 		// Create the single ListView upon item click/selection
 		ListView lv = getListView();
 		lv.setOnItemClickListener(new OnItemClickListener() {
@@ -130,6 +132,16 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 		});
 
 
+//		lv.setOnTouchListener(new OnTouchListener() {
+//			@Override
+//			public boolean onTouch(View view, MotionEvent arg1) {
+//				view.setBackgroundColor(getActivity().getResources().getColor(R.color.LightGreen));
+//				return false;
+//			}
+//		});
+		
+		
+		
     	//registerForContextMenu(getListView());
 
 		
@@ -238,7 +250,7 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
     }
     
     public void filterOANode() {
-		final CharSequence[] items = {"OASystem ID", "OANode ID", "Public/Private", "Enabled/Disabled"};
+		final CharSequence[] items = {"System ID", " mNode ID", "Public/Private", "Enabled/Disabled"};
 		//final CharSequence[] items = (CharSequence[]) hmFilterMenu.values().toArray();
 		AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
 		adb.setTitle("Group OANodes by:");

@@ -3,6 +3,7 @@ package com.OAMobile.OAItem;
 import java.util.HashMap;
 
 import android.content.Context;
+import android.graphics.drawable.StateListDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +55,8 @@ public class OANodeItem implements OAItem, OAMobileTags {
 			LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View v = vi.inflate(R.layout.oanode_list, null);
 
+			v.setBackgroundResource(R.drawable.selectors);
+			
 			if(v.findViewById(R.id.sNodeId) != null)
 				((TextView)v.findViewById(R.id.sNodeId)).setText((String) map.get(NODE_ID));
 			if(v.findViewById(R.id.sChannelNames) != null)
