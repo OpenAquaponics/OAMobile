@@ -24,12 +24,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.DragEvent;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnDragListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -131,15 +134,14 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 			}
 		});
 
-
 //		lv.setOnTouchListener(new OnTouchListener() {
-//			@Override
-//			public boolean onTouch(View view, MotionEvent arg1) {
-//				view.setBackgroundColor(getActivity().getResources().getColor(R.color.LightGreen));
-//				return false;
-//			}
-//		});
-		
+//            @Override
+//            public boolean onTouch(final View view, final MotionEvent event) {
+//            	((OAMobileActivity)getActivity()).swipeLeft();
+//            	return true;
+//            }
+//        });
+
 		
 		
     	//registerForContextMenu(getListView());
@@ -153,6 +155,7 @@ public class OANodeFragment extends ListFragment implements OAMobileTags {
 //	    MenuInflater inflater = getActivity().getMenuInflater();
 //	    inflater.inflate(R.menu.oanode_menu, menu);
 //	}
+    
     
     public void loadOANodes() {
 		try {

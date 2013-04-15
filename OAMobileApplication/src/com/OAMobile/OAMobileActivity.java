@@ -10,9 +10,11 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.View.OnTouchListener;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 
 
@@ -20,7 +22,12 @@ public class OAMobileActivity extends Activity {
 	
 	private OAMobileData gData = null;
 
+    
+    public void swipeLeft() {
+    	Log.d("OAMobile", "Swiping Left");
+    }
 
+  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,8 +160,7 @@ public class OAMobileActivity extends Activity {
 			// TODO Auto-generated method stub
 		}
     }
-    
-    
+
 
 }
 
